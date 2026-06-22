@@ -6,8 +6,6 @@ main-thread animation timer via ``tick()`` so all AppKit calls stay on the main 
 """
 from __future__ import annotations
 
-from pathlib import Path
-
 from AppKit import (
     NSAnimationContext,
     NSColor,
@@ -25,6 +23,8 @@ from AppKit import (
     NSWindowStyleMaskNonactivatingPanel,
 )
 from PyObjCTools import AppHelper
+
+from w1_macos.paths import resource_dir
 
 # Liquid-glass backdrop (real system blur of the desktop behind the widget). Imported
 # defensively so the widget still works if the constants are unavailable.
@@ -49,7 +49,7 @@ try:
 except Exception:  # pragma: no cover
     _EASE = None
 
-_ASSETS = Path(__file__).resolve().parents[2] / "assets" / "widget" / "states"
+_ASSETS = resource_dir() / "assets" / "widget" / "states"
 _WIDTH, _HEIGHT = 86, 26           # pill size on listen (trimmed so the waveform fills it)
 _CIRCLE = 44                       # resting state: a slightly elongated lozenge (not a full circle)
 _REJECT_HOLD = 0.7                 # seconds the red ✕ lingers before collapsing back to rest

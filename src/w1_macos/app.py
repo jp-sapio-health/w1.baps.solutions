@@ -18,9 +18,10 @@ from w1_core import __version__
 from w1_core.config import CorrectionMode, W1Config
 from w1_macos.controller import Controller
 from w1_macos.hotkey import HotkeyListener
+from w1_macos.paths import resource_dir
 
-_REPO_ROOT = Path(__file__).resolve().parents[2]
-_MENUBAR = _REPO_ROOT / "assets" / "menubar"
+_REPO_ROOT = Path(__file__).resolve().parents[2]  # dev source root (for relaunch re-exec)
+_MENUBAR = resource_dir() / "assets" / "menubar"  # frozen-bundle aware
 
 
 def _short_version() -> str:
