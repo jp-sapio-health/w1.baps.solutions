@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Window,
@@ -25,6 +25,40 @@ import {
 } from "@pikoloo/darwin-ui";
 
 const REPO = "https://github.com/jp-sapio-health/w1.baps.solutions";
+
+// Floating glass navbar — the chrome recipe from the Sapio docs design system (sticky, max-w-4xl,
+// translucent glass pill), with the BAPS logo + W1 wordmark in place of the Sapio mark.
+const GLASS_NAV: CSSProperties = {
+  background: "rgba(255,255,255,0.5)",
+  backdropFilter: "blur(24px) saturate(1.8)",
+  WebkitBackdropFilter: "blur(24px) saturate(1.8)",
+  border: "1px solid rgba(255,255,255,0.6)",
+  boxShadow:
+    "0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)",
+};
+
+function Navbar() {
+  return (
+    <div className="nav-outer">
+      <header className="nav-pill" style={GLASS_NAV}>
+        <a className="nav-brand" href="#top">
+          <img src="/baps-logo.svg" alt="BAPS" width={22} height={22} />
+          <span className="nav-word">
+            <strong>W1</strong>
+            <span className="nav-sub">.baps.solutions</span>
+          </span>
+        </a>
+        <nav className="nav-links">
+          <a href="#modes">Modes</a>
+          <a href="#how">How it works</a>
+          <a href={REPO} target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+        </nav>
+      </header>
+    </div>
+  );
+}
 
 const MODES = [
   {
@@ -76,10 +110,7 @@ function Hero() {
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <div className="wordmark">
-          <span className="devanagari">वाणी</span>
-          <span className="dot">·</span>
-          <span className="w1">W1</span>
-          <Badge variant="success">v1.1</Badge>
+          <Badge variant="secondary">On-device · macOS · v1.1</Badge>
         </div>
         <h1>Local, private dictation.</h1>
         <p className="lede">
@@ -204,7 +235,7 @@ function ControlPanel() {
 
 function Modes() {
   return (
-    <section className="modes">
+    <section className="modes" id="modes">
       <h2>Four modes, one keypress</h2>
       <div className="mode-grid">
         {MODES.map((m, i) => (
@@ -232,7 +263,7 @@ function Modes() {
 
 function HowItWorks() {
   return (
-    <section className="how">
+    <section className="how" id="how">
       <h2>How it works</h2>
       <div className="steps">
         {STEPS.map((s) => (
@@ -251,13 +282,17 @@ function HowItWorks() {
 
 export function App() {
   return (
-    <div className="page light">
+    <div className="page light" id="top">
+      <Navbar />
       <Hero />
       <ControlPanel />
       <Modes />
       <HowItWorks />
       <footer>
-        <span>वाणी · W1</span>
+        <span className="foot-brand">
+          <img src="/baps-logo.svg" alt="BAPS" width={18} height={18} />
+          W1
+        </span>
         <span className="muted">Built for sewa. Private by design.</span>
         <a href={REPO} target="_blank" rel="noreferrer">
           GitHub
