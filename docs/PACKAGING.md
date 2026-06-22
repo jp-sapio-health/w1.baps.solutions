@@ -1,16 +1,31 @@
-# Packaging w1 as a macOS app
+# Packaging W1 as a macOS app
 
-w1 ships two ways. For developers, `./install.sh` + `./w1 app` is the tested path. To hand a
+W1 ships two ways. For developers, `./install.sh` + `./w1 app` is the tested path. To hand a
 double-clickable app to non-technical users, build a `.app` bundle with py2app.
 
 ## Build
 
-```bash
-# one-time: add the build tool to the venv (asks before installing — see supply-chain policy)
-uv pip install --python .venv/bin/python -e '.[mlx,macos,dev,build]'
+> **Build-environment requirement (important).** py2app needs a **framework** Python. The
+> default `./install.sh` venv uses uv's *standalone* CPython, whose frozen stdlib modules lack
+> `__file__`; py2app 0.28.8 aborts on it with `module 'zlib' has no attribute '__file__'` after
+> producing only a partial bundle. Build from a framework Python instead:
+>
+> ```bash
+> brew install python@3.12                      # framework build of 3.12
+> /opt/homebrew/opt/python@3.12/bin/python3.12 -m venv .venv-build
+> .venv-build/bin/pip install -e '.[mlx,macos,build]'
+> .venv-build/bin/python packaging/setup_app.py py2app
+> ```
+>
+> (python.org's 3.12 installer works too.) The recipe already excludes torch — an mlx-whisper
+> *weight-conversion* dep never needed at MLX-inference runtime — to keep the module graph
+> tractable. After building, **launch the bundle and test mic capture + the three TCC grants
+> on-device** before sharing; py2app freezing can miss a lazily-imported module (add it to
+> `OPTIONS["includes"]`).
 
-packaging/build.sh            # -> dist/w1.app
-packaging/build.sh --dmg      # -> dist/w1.app + dist/w1.dmg
+```bash
+packaging/build.sh            # -> dist/W1.app   (point .venv at a framework Python first)
+packaging/build.sh --dmg      # -> dist/W1.app + dist/W1.dmg
 ```
 
 The bundle is **menu-bar only** (`LSUIElement`) and does **not** embed the Whisper model — it
