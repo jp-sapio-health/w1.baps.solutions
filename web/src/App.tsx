@@ -49,6 +49,7 @@ function Navbar() {
           </span>
         </a>
         <nav className="nav-links">
+          <a href="#install">Install</a>
           <a href="#modes">Modes</a>
           <a href="#how">How it works</a>
           <a href={REPO} target="_blank" rel="noreferrer">
@@ -101,7 +102,8 @@ const HISTORY = [
 ];
 
 function Hero() {
-  const toast = useToast();
+  const scrollToInstall = () =>
+    document.getElementById("install")?.scrollIntoView({ behavior: "smooth" });
   return (
     <section className="hero">
       <motion.div
@@ -119,17 +121,8 @@ function Hero() {
           fully on-device.
         </p>
         <div className="cta">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={() =>
-              toast.showToast("Grab the latest W1.dmg from the repo's Releases.", {
-                title: "Download W1",
-                type: "success",
-              })
-            }
-          >
-            Download for macOS
+          <Button variant="primary" size="lg" onClick={scrollToInstall}>
+            Install
           </Button>
           <Button variant="outline" size="lg" onClick={() => window.open(REPO, "_blank")}>
             View source
@@ -261,6 +254,91 @@ function Modes() {
   );
 }
 
+function CodeBlock({ title, lines }: { title?: string; lines: string[] }) {
+  const toast = useToast();
+  const copy = () => {
+    navigator.clipboard?.writeText(lines.join("\n"));
+    toast.showToast("Copied to clipboard", { type: "success" });
+  };
+  return (
+    <div className="codeblock">
+      <div className="codeblock-bar">
+        <span className="dot r" />
+        <span className="dot y" />
+        <span className="dot g" />
+        {title && <span className="codeblock-title">{title}</span>}
+        <button className="codeblock-copy" onClick={copy}>
+          Copy
+        </button>
+      </div>
+      <pre className="codeblock-body">
+        {lines.map((l, i) => {
+          const h = l.indexOf("#");
+          if (h > 0)
+            return (
+              <code key={i}>
+                {l.slice(0, h)}
+                <span className="comment">{l.slice(h)}</span>
+              </code>
+            );
+          return (
+            <code key={i} className={l.startsWith("#") ? "comment" : ""}>
+              {l || " "}
+            </code>
+          );
+        })}
+      </pre>
+    </div>
+  );
+}
+
+function Install() {
+  return (
+    <section className="install" id="install">
+      <h2>Install</h2>
+      <p className="section-lede">
+        Apple Silicon Mac with{" "}
+        <a href="https://docs.astral.sh/uv/" target="_blank" rel="noreferrer">
+          uv
+        </a>{" "}
+        installed. One command sets up the virtualenv, dependencies, and the Whisper model.
+      </p>
+      <CodeBlock
+        title="Terminal"
+        lines={[
+          "git clone https://github.com/jp-sapio-health/w1.baps.solutions.git w1",
+          "cd w1",
+          "./install.sh        # venv + deps + model + permission links",
+          "./w1 app            # launch the menu-bar app",
+        ]}
+      />
+      <p className="install-note">
+        Grant <strong>Microphone</strong>, <strong>Accessibility</strong>, and{" "}
+        <strong>Input Monitoring</strong> to your terminal when prompted, then hold{" "}
+        <kbd>Right-Option</kbd> and speak.
+      </p>
+    </section>
+  );
+}
+
+function Cli() {
+  return (
+    <section className="cli" id="cli">
+      <h2>Command line</h2>
+      <CodeBlock
+        title="w1"
+        lines={[
+          "./w1 app                       # menu-bar app + floating widget",
+          "./w1 dictate                   # record, correct, paste",
+          "./w1 transcribe FILE --mode …  # transcribe an audio file",
+          './w1 correct "text" --mode …   # run the correction engine only',
+          "./w1 doctor                    # check deps, model, permissions",
+        ]}
+      />
+    </section>
+  );
+}
+
 function HowItWorks() {
   return (
     <section className="how" id="how">
@@ -285,8 +363,10 @@ export function App() {
     <div className="page light" id="top">
       <Navbar />
       <Hero />
+      <Install />
       <ControlPanel />
       <Modes />
+      <Cli />
       <HowItWorks />
       <footer>
         <span className="foot-brand">
