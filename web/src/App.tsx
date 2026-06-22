@@ -216,7 +216,6 @@ function ControlPanel() {
                 <strong>W1 v1.1</strong> — a local, privacy-first macOS dictation app that replaces
                 paid tools like Wispr Flow, and knows BAPS Gujarati sacred terminology.
               </p>
-              <p className="muted">Built for sewa. Private by design.</p>
             </div>
           </TabsContent>
         </Tabs>
@@ -372,7 +371,6 @@ export function App() {
           <img src="/baps-logo.svg" alt="BAPS" width={18} height={18} />
           W1
         </span>
-        <span className="muted">Built for sewa. Private by design.</span>
         <a href={REPO} target="_blank" rel="noreferrer">
           GitHub
         </a>
