@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# w1 — run the CLI against the LIVE source tree (no reinstall needed during development).
+# Usage: ./w1 transcribe FILE | ./w1 dictate | ./w1 correct "text" | ./w1 doctor
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ ! -x "$DIR/.venv/bin/python" ]; then
+  echo "w1: no virtualenv found at $DIR/.venv — run ./install.sh first" >&2
+  exit 1
+fi
+PYTHONPATH="$DIR/src${PYTHONPATH:+:$PYTHONPATH}" exec "$DIR/.venv/bin/python" -m w1_macos.cli "$@"

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>W1 — local dictation</title>
+<style>
+  :root{
+    --bg:#F4F5F8; --surface:#FFFFFF; --surface2:#F1F3F7; --surface3:#E9ECF2;
+    --border:#E3E7EF; --text:#1B2030; --muted:#67708A; --muted2:#99A2B4;
+    --saffron1:#E8870E; --saffron2:#D9790A; --green:#1FA877; --red:#E5484D; --radius:18px;
+  }
+  @font-face{font-family:'Ubuntu Sans Mono';src:url('fonts/UbuntuSansMono-VariableFont_wght.ttf') format('truetype');font-weight:100 800;font-style:normal;font-display:swap}
+  @font-face{font-family:'Ubuntu Sans Mono';src:url('fonts/UbuntuSansMono-Italic-VariableFont_wght.ttf') format('truetype');font-weight:100 800;font-style:italic;font-display:swap}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Ubuntu Sans Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    background:radial-gradient(1100px 640px at 82% -12%,#FFF1DD 0%,var(--bg) 52%);
+    color:var(--text);-webkit-font-smoothing:antialiased;display:flex;min-height:100vh;
+  }
+  /* ---------- sidebar ---------- */
+  .sidebar{width:248px;flex:0 0 248px;background:linear-gradient(180deg,#FFFFFF,#FAFBFD);
+    border-right:1px solid var(--border);display:flex;flex-direction:column;padding:22px 16px;gap:6px}
+  .brand{display:flex;align-items:center;gap:11px;padding:6px 10px 20px}
+  .brand .mark{font-size:26px;font-weight:800;background:linear-gradient(135deg,#1B2030,#4A5267);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .brand .dev{font-size:13px;color:var(--saffron1);font-weight:700;letter-spacing:.5px}
+  .nav{display:flex;flex-direction:column;gap:3px}
+  .nav button{display:flex;align-items:center;gap:12px;width:100%;padding:11px 13px;border:none;
+    background:transparent;color:var(--muted);border-radius:12px;cursor:pointer;font-size:14.5px;
+    font-weight:600;transition:.15s;text-align:left}
+  .nav button:hover{background:var(--surface2);color:var(--text)}
+  .nav button.active{background:linear-gradient(135deg,rgba(244,160,36,.16),rgba(232,135,14,.07));
+    color:var(--text);box-shadow:inset 0 0 0 1px rgba(244,160,36,.22)}
+  .nav button.active svg{color:var(--saffron1)}
+  .nav svg{width:18px;height:18px;flex:0 0 18px;color:var(--muted2)}
+  .privacy{margin-top:auto;background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:13px 14px;font-size:12px;color:var(--muted);line-height:1.5}
+  .privacy b{color:var(--green)}
+  /* ---------- main ---------- */
+  .main{flex:1;min-width:0;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 30px;
+    border-bottom:1px solid var(--border);background:rgba(255,255,255,.72);backdrop-filter:blur(8px)}
+  .topbar h1{font-size:19px;font-weight:700}
+  .topbar .sub{color:var(--muted);font-size:13px;margin-top:2px}
+  .modechip{display:flex;align-items:center;gap:9px;background:var(--surface2);border:1px solid var(--border);
+    padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer}
+  .modechip .dot{width:8px;height:8px;border-radius:50%;background:var(--saffron1);box-shadow:0 0 8px var(--saffron1)}
+  .content{padding:28px 30px;overflow-y:auto;flex:1}
+  .view{display:none;animation:fade .3s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* ---------- cards / grid ---------- */
+  .grid{display:grid;gap:18px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;
+    box-shadow:0 1px 2px rgba(20,30,60,.04),0 8px 22px rgba(20,30,60,.05)}
+  .hero{background:linear-gradient(135deg,#FFF7EC,#FFFFFF);position:relative;overflow:hidden;
+    box-shadow:0 1px 2px rgba(20,30,60,.04),0 12px 32px rgba(232,135,14,.07)}
+  .hero h2{font-size:23px;font-weight:750;margin-bottom:6px}
+  .hero p{color:var(--muted);font-size:14.5px;max-width:520px;line-height:1.55}
+  .pill-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(55,200,146,.12);
+    color:var(--green);font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:999px;margin-bottom:16px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px}
+  .stat .n{font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .stat .n.saff{color:var(--saffron1)}
+  .stat .l{color:var(--muted);font-size:13px;margin-top:3px}
+  .section-title{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted2);
+    font-weight:700;margin:30px 2px 14px}
+  /* ---------- mic button (per Jay's MicButton) ---------- */
+  .micwrap{display:flex;flex-direction:column;align-items:center;gap:16px;padding:14px 0 4px}
+  .micpos{position:relative;width:88px;height:88px}
+  .ring{position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,var(--saffron1),var(--saffron2));opacity:0}
+  .micbtn.listening .ring.r1{animation:ring 1.5s ease-out infinite}
+  .micbtn.listening .ring.r2{animation:ring 1.5s ease-out infinite .4s}
+  @keyframes ring{0%{transform:scale(1);opacity:.32}100%{transform:scale(1.7);opacity:0}}
+  .micbtn{position:relative;width:88px;height:88px;border:none;border-radius:50%;cursor:pointer;
+    background:linear-gradient(135deg,var(--saffron1),var(--saffron2));display:flex;align-items:center;
+    justify-content:center;box-shadow:0 12px 30px rgba(244,160,36,.28);transition:.25s}
+  .micbtn:hover{transform:scale(1.05);box-shadow:0 14px 38px rgba(244,160,36,.42)}
+  .micbtn svg{width:33px;height:33px;color:#fff}
+  .miclabel{color:var(--muted);font-size:13.5px}
+  /* ---------- widget preview ---------- */
+  .widgets{display:flex;flex-direction:column;gap:16px}
+  .pill{display:flex;align-items:center;justify-content:space-between;gap:12px;width:330px;height:66px;
+    border-radius:33px;background:linear-gradient(180deg,#252b3b,#171b26);border:1px solid #30374a;
+    padding:0 12px;box-shadow:0 8px 22px rgba(0,0,0,.35);position:relative}
+  .pill.live{border-color:#5a4622}
+  .circle{width:40px;height:40px;border-radius:50%;background:#202637;border:1px solid #3a4256;
+    display:flex;align-items:center;justify-content:center;flex:0 0 40px}
+  .circle svg{width:18px;height:18px;color:#646c80}
+  .pill.live .circle.x svg{color:var(--red)} .pill.live .circle.x{border-color:#5a3340;background:#2a2230}
+  .pill.live .circle.v svg{color:var(--green)} .pill.live .circle.v{border-color:#2f5a4c;background:#1e2a28}
+  .wave{display:flex;align-items:center;gap:4px;height:40px}
+  .wave i{width:4px;border-radius:3px;background:#3c4358;height:9px}
+  .pill.live .wave i{background:linear-gradient(180deg,#f7b53c,#e8870e)}
+  .pill.live .wave i:nth-child(odd){animation:bar .7s ease-in-out infinite alternate}
+  .pill.live .wave i:nth-child(even){animation:bar .55s ease-in-out infinite alternate}
+  @keyframes bar{from{height:8px}to{height:42px}}
+  .recdot{position:absolute;top:11px;right:16px;width:8px;height:8px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 8px var(--red)}
+  .wstate{font-size:12.5px;color:var(--muted);margin-left:4px}
+  /* ---------- mode cards ---------- */
+  .modecards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .modecard{cursor:pointer;border:1px solid var(--border);transition:.18s}
+  .modecard:hover{border-color:#3c465e}
+  .modecard.sel{box-shadow:inset 0 0 0 1.5px var(--saffron1);background:linear-gradient(135deg,rgba(244,160,36,.08),transparent)}
+  .modecard h3{font-size:16px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .modecard .tag{font-size:11px;font-weight:700;color:var(--saffron1);background:rgba(244,160,36,.12);
+    padding:3px 8px;border-radius:6px}
+  .modecard p{color:var(--muted);font-size:13px;line-height:1.5;margin-top:6px}
+  /* ---------- history ---------- */
+  .trow{border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:12px;background:var(--surface)}
+  .trow .meta{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .trow .when{color:var(--muted2);font-size:12px;margin-left:auto}
+  .badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px}
+  .badge.dict{color:var(--saffron1);background:rgba(244,160,36,.12)}
+  .badge.raw{color:#8fb6ff;background:rgba(143,182,255,.12)}
+  .ttext{font-size:14.5px;line-height:1.5}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+  .chip{font-size:11.5px;color:var(--muted);background:var(--surface3);border:1px solid var(--border);
+    padding:4px 10px;border-radius:999px}
+  .chip b{color:var(--saffron1);font-weight:700}
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{text-align:left;color:var(--muted2);font-size:12px;text-transform:uppercase;letter-spacing:1px;
+    padding:0 14px 12px;font-weight:700}
+  td{padding:13px 14px;border-top:1px solid var(--border);vertical-align:top}
+  td .term{font-weight:700} td .cat{font-size:12px;color:var(--muted)}
+  .shield{color:var(--green)}
+  .catchip{display:inline-block;font-size:11px;color:var(--muted);background:var(--surface3);
+    padding:3px 9px;border-radius:6px}
+  /* ---------- buttons / settings ---------- */
+  .btn{background:linear-gradient(135deg,var(--saffron1),var(--saffron2));color:#fff;border:none;
+    padding:11px 20px;border-radius:11px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 8px 20px rgba(244,160,36,.25)}
+  .btn.ghost{background:var(--surface2);color:var(--text);box-shadow:none;border:1px solid var(--border)}
+  .srow{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid var(--border)}
+  .srow:first-child{border-top:none}
+  .srow .lab{font-weight:600;font-size:14.5px} .srow .desc{color:var(--muted);font-size:13px;margin-top:2px}
+  kbd{background:var(--surface3);border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;
+    padding:3px 8px;font-size:12px;font-family:inherit}
+  .muted{color:var(--muted)}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="mark">W1</span><span class="dev">dictation</span></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="privacy">🔒 <b>100% on-device.</b><br/>Nothing — no audio, no text — ever leaves your Mac.</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><h1 id="vtitle">Dashboard</h1><div class="sub" id="vsub">Your private, BAPS-aware dictation</div></div>
+      <div class="modechip" id="modechip"><span class="dot"></span><span id="modename">Dictation · Sewa</span></div>
+    </header>
+    <div class="content" id="content"></div>
+  </main>
+
+<script>
+function ic(n){const p={
+  home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',
+  layers:'<path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M18 3v18"/>',
+  users:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M17 20a6 6 0 0 0-3-5"/>',
+  cog:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>', check:'<path d="M5 12l4 5 10-12"/>',
+}[n]||'';return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`}
+
+const wave = (live)=>`<div class="wave">${Array.from({length:13}).map((_,i)=>`<i style="height:${live?[14,26,40,22,48,34,52,30,44,24,38,20,14][i]:[9,12,9,14,10,16,10,14,9,12,9,13,9][i]}px"></i>`).join('')}</div>`;
+const pill=(cls,label)=>`<div><div class="pill ${cls}">${cls.includes('live')?'<span class="recdot"></span>':''}
+  <div class="circle x">${ic('x')}</div>${wave(cls.includes('live'))}<div class="circle v">${ic('check')}</div></div>
+  <div class="wstate">${label}</div></div>`;
+
+const views = {
+dashboard:`
+  <div class="grid" style="grid-template-columns:1.5fr 1fr">
+    <div class="card hero">
+      <span class="pill-tag">🔒 Private by design</span>
+      <h2>Good evening, Jay.</h2>
+      <p>Press your hotkey and speak — W1 transcribes on-device and gets your BAPS terms right, while leaving ordinary and clinical English exactly as you said it.</p>
+      <div class="micwrap">
+        <div class="micpos"><button class="micbtn" id="mic" onclick="toggleMic()">
+          <span class="ring r1"></span><span class="ring r2"></span>${ic('mic')}</button></div>
+        <div class="miclabel" id="miclabel">Tap to start dictation · or hold Right-Option</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title" style="margin-top:0">Widget preview</div>
+      <div class="widgets">
+        ${pill('','Idle — resting in the corner')}
+        ${pill('live','Listening — speak now')}
+      </div>
+    </div>
+  </div>
+  <div class="stats" style="margin-top:18px">
+    <div class="card stat"><div class="n">1,284</div><div class="l">words dictated today</div></div>
+    <div class="card stat"><div class="n saff">37</div><div class="l">sacred terms corrected</div></div>
+    <div class="card stat"><div class="n">3</div><div class="l">meetings transcribed</div></div>
+  </div>
+  <div class="section-title">Recent activity</div>
+  ${trow('dict','2 min ago','We did darshan at the <b>mandir</b> for <b>satsang</b> and the <b>arti</b>.',['temple→mandir','fuzzy: ardi→arti'])}
+  ${trow('raw','18 min ago','The patient’s temple was tender on palpation; no photophobia.',[])}
+`,
+modes:`
+  <div class="modecards">
+    <div class="card modecard sel" onclick="selMode(this,'Dictation · Sewa')">
+      <h3>Dictation <span class="tag">Sewa · default</span></h3>
+      <p>Corrects BAPS sacred terms (temple→mandir, aarti→arti) and snaps mis-heard Gujarati words to their canonical spelling. Your ordinary English is untouched.</p></div>
+    <div class="card modecard" onclick="selMode(this,'Raw · Clinical')">
+      <h3>Raw <span class="tag">Clinical</span></h3>
+      <p>No terminology changes at all — for clinical notes where "temple" is anatomy and "Maya" is a name. Maximum safety.</p></div>
+    <div class="card modecard" onclick="selMode(this,'Document')">
+      <h3>Document <span class="tag">Editorial</span></h3>
+      <p>Full editorial polish: removes filler and hedging, applies formal phrasing. For written documents, not quick messages.</p></div>
+  </div>
+  <div class="section-title">How correction works</div>
+  <div class="card"><p class="muted" style="line-height:1.7;font-size:14px">Two stages, fully on-device: <b style="color:var(--saffron1)">①</b> a glossary bias prompt steers Whisper toward 230+ BAPS terms; <b style="color:var(--saffron1)">②</b> a deterministic pass masks 20 protected terms, fuzzy-snaps near-misses, then applies mode-filtered rules. Editorial rules can <i>never</i> fire in Dictation or Raw mode — so clinical English is safe.</p></div>
+`,
+history:`
+  ${trow('dict','Today 14:32','We did darshan at the <b>mandir</b> for <b>satsang</b>, then <b>Pramukh Swami Maharaj</b>’s <b>Vachanamrut</b> <b>katha</b> before <b>arti</b>.',['temple→mandir','fuzzy: vachanamrit→Vachanamrut','fuzzy: morti→murti'])}
+  ${trow('raw','Today 11:05','Right temporal headache radiating to the temple, worse on coughing. For CT head.',[])}
+  ${trow('dict','Yesterday','The <b>Swamis</b> led the <b>kirtan</b> and explained <b>dharma</b> through the <b>shastras</b>.',['saints→Swamis','scripture→shastra'])}
+  ${trow('dict','Yesterday','Lets meet on tuesday to finalise the <b>mandir</b> seva rota.',['self-correction: monday→tuesday'])}
+`,
+glossary:`
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <input placeholder="Search 230+ terms…" style="background:var(--surface);border:1px solid var(--border);
+      color:var(--text);padding:10px 14px;border-radius:11px;width:280px;font-size:14px"/>
+    <button class="btn">+ Add / correct a term</button></div>
+  <div class="card" style="padding:8px 8px 6px">
+  <table><thead><tr><th>Term</th><th>Category</th><th>Definition</th><th></th></tr></thead><tbody>
+    ${grow('Akshardham','Doctrinal','The highest divine abode of Bhagwan Swaminarayan.',true)}
+    ${grow('mandir','Ritual','Sanctified place of worship (never "temple").',true)}
+    ${grow('Vachanamrut','Scriptures','273 recorded divine discourses of Bhagwan Swaminarayan.',false)}
+    ${grow('satsang','Doctrinal','Holy fellowship; the BAPS spiritual community.',true)}
+    ${grow('arti','Ritual','Ritual of waving lighted wicks before the murti.',true)}
+    ${grow('Satpurush','Titles','True spiritual guide; manifest form of Aksharbrahma.',false)}
+    ${grow('annakut','Food & Cultural','Grand offering of many food dishes before the murti.',false)}
+  </tbody></table></div>
+`,
+meetings:`
+  <div class="card" style="display:flex;align-items:center;justify-content:space-between">
+    <div><h3 style="font-size:17px">Record a meeting</h3>
+    <p class="muted" style="font-size:13.5px;margin-top:4px">Captures everyone (system audio + your mic), labels speakers, saves a transcript. Works with Meet, Teams &amp; Zoom.</p>
+    <p class="muted" style="font-size:12.5px;margin-top:8px">Destination · <b style="color:var(--text)">~/Documents/w1-meetings/</b> &nbsp;<span style="color:var(--saffron1);cursor:pointer">change</span></p></div>
+    <button class="btn">● Start capture</button></div>
+  <div class="section-title">Saved meetings</div>
+  ${mrow('Sewa planning — mandir rota','Today','24 min','3 speakers')}
+  ${mrow('MDT — vascular','Yesterday','41 min','5 speakers')}
+  ${mrow('Investor update — Sapio seed','2 days ago','52 min','4 speakers')}
+`,
+settings:`
+  <div class="card">
+    ${srow('Hotkey','Hold <kbd>Right ⌥</kbd> to talk · double-tap to toggle','<button class="btn ghost">Rebind</button>')}
+    ${srow('Insert mode','Paste (handles Gujarati Unicode) · or type','<button class="btn ghost">Paste ▾</button>')}
+    ${srow('Model','whisper-large-v3-turbo · on-device (MLX)','<button class="btn ghost">Change ▾</button>')}
+    ${srow('Audio cues','Soft start/stop sounds','<span class="muted">On</span>')}
+    ${srow('Launch at login','Start w1 when you log in','<span class="muted">On</span>')}
+  </div>
+  <div class="section-title">Privacy</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(55,200,146,.07),transparent)">
+    <p style="line-height:1.7;font-size:14px"><b style="color:var(--green)">Everything runs on your Mac.</b> No cloud, no account, no telemetry. Audio is processed in memory and discarded — no recording or transcript is stored unless you choose to. Safe for clinical and personal dictation.</p>
+  </div>
+`,
+};
+
+function trow(mode,when,text,chips){
+  return `<div class="trow"><div class="meta">
+    <span class="badge ${mode}">${mode==='dict'?'Dictation':'Raw'}</span>
+    <span class="when">${when}</span></div>
+    <div class="ttext">${text}</div>
+    ${chips.length?`<div class="chips">${chips.map(c=>{const[a,b]=c.split('→');return `<span class="chip">${b?`${a}→<b>${b}</b>`:`<b>${a}</b>`}</span>`}).join('')}</div>`:''}
+  </div>`}
+function grow(term,cat,def,prot){return `<tr><td><span class="term">${term}</span></td>
+  <td><span class="catchip">${cat}</span></td><td class="muted">${def}</td>
+  <td>${prot?'<span class="shield" title="Protected — never altered">🛡</span>':''}</td></tr>`}
+function mrow(t,d,dur,sp){return `<div class="trow" style="display:flex;align-items:center;gap:14px">
+  <div style="width:38px;height:38px;border-radius:10px;background:var(--surface3);display:flex;align-items:center;justify-content:center">${ic('users')}</div>
+  <div><div style="font-weight:650">${t}</div><div class="muted" style="font-size:12.5px;margin-top:2px">${d} · ${dur} · ${sp}</div></div>
+  <button class="btn ghost" style="margin-left:auto">Open</button></div>`}
+function srow(lab,desc,ctrl){return `<div class="srow"><div><div class="lab">${lab}</div><div class="desc">${desc}</div></div>${ctrl}</div>`}
+
+const subs={dashboard:'Your private, BAPS-aware dictation',modes:'Choose how much w1 corrects',
+  history:'Everything stays on your Mac',glossary:'230+ BAPS sacred terms',
+  meetings:'Capture, diarize, transcribe',settings:'Make w1 yours'};
+function show(v){
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  document.getElementById('content').innerHTML=`<div class="view active">${views[v]}</div>`;
+  document.getElementById('vtitle').textContent=v[0].toUpperCase()+v.slice(1);
+  document.getElementById('vsub').textContent=subs[v];
+}
+const NAV=[['dashboard','home','Dashboard'],['modes','layers','Modes'],['history','clock','History'],['glossary','book','Glossary'],['meetings','users','Meetings'],['settings','cog','Settings']];
+document.getElementById('nav').innerHTML=NAV.map(([v,icn,lbl])=>`<button data-v="${v}">${ic(icn)}${lbl}</button>`).join('');
+document.getElementById('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b)show(b.dataset.v)});
+function toggleMic(){const m=document.getElementById('mic');const on=m.classList.toggle('listening');
+  document.getElementById('miclabel').textContent=on?'Listening… tap to stop':'Tap to start dictation · or hold Right-Option'}
+function selMode(el,name){document.querySelectorAll('.modecard').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');document.getElementById('modename').textContent=name}
+window.addEventListener('hashchange',()=>show(location.hash.slice(1)||'dashboard'));
+show(location.hash.slice(1)||'dashboard');
+</script>
+</body>
+</html>

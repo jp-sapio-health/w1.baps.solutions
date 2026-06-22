@@ -1,0 +1,88 @@
+# w1 — local, privacy-first bilingual dictation. See PLAN.md for architecture.
+# All runtime pins are >1 month old per workspace supply-chain rules. The build backend
+# pin (hatchling) is finalised from the uv lockfile at install time.
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "w1"
+version = "1.1.0"
+description = "Local, privacy-first bilingual dictation that replaces Wispr Flow — English + BAPS Gujarati sacred terms, fully on-device."
+readme = "README.md"
+requires-python = "==3.12.*"
+license = { text = "MIT" }
+authors = [{ name = "Jay Patel" }]
+
+# Core engine deps only — pure-compute, cross-platform (the iOS/Android-portable subset).
+# NO desktop / ML / audio-device libraries here (enforced by import-linter + core-only CI).
+dependencies = [
+    "pydantic==2.13.4",
+    "rapidfuzz==3.14.5",
+    "jellyfish==1.2.1",
+    "pyyaml==6.0.3",
+    "numpy==2.4.6",
+]
+
+[project.optional-dependencies]
+mlx = ["mlx-whisper==0.4.3"]                # default backend on Apple Silicon (Metal)
+faster = ["faster-whisper==1.2.1"]          # portable fallback (CI-validated on non-Apple-Silicon)
+macos = [
+    "rumps==0.4.0",                         # menu-bar app
+    "pynput==1.8.2",                        # global hotkey + Cmd+V synthesis
+    "sounddevice==0.5.5",                   # mic capture (needs portaudio via brew)
+    "pyperclip==1.11.0",                    # clipboard paste + restore
+]
+eval = ["jiwer==4.0.0"]                     # WER scoring in the offline harness
+dev = [
+    "pytest==9.0.3",
+    "pytest-cov==7.1.0",
+    "import-linter==2.11",
+]
+build = ["py2app==0.28.8"]                  # macOS .app bundling (packaging/build.sh)
+
+[project.scripts]
+w1 = "w1_macos.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/w1_core", "src/w1_data", "src/w1_macos"]
+artifacts = ["src/w1_data/*.json"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "scripts", "PLAN.md", "README.md"]
+
+# --- Platform-boundary contract: w1_core must stay desktop/ML-agnostic ---------------
+[tool.importlinter]
+root_packages = ["w1_core", "w1_macos", "w1_data"]
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "w1_core stays platform-agnostic (no macOS/desktop imports)"
+type = "forbidden"
+source_modules = ["w1_core"]
+forbidden_modules = [
+    "w1_macos", "rumps", "pynput", "sounddevice", "pyperclip",
+    "AppKit", "Quartz", "objc",
+]
+# ML backends (mlx_whisper/faster_whisper) are lazy-imported optional deps inside
+# w1_core/backends. The "import w1_core with no ML libs installed" guarantee is covered by
+# the dedicated core-only CI install test, not by this static contract.
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+    "slow: audio/WER tests requiring the Whisper model (run on Apple Silicon, skipped in CI)",
+    "macos: tests requiring macOS desktop APIs (skipped in headless CI)",
+]
+addopts = "-q --strict-markers"
+
+[tool.coverage.run]
+branch = true
+# The pure-logic core. Backends (mlx/faster) are env-dependent lazy ML imports, exercised by
+# the slow/integration tests on Apple Silicon rather than this unit-coverage gate.
+source = ["w1_core.correction", "w1_core.pipeline", "w1_core.config"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80

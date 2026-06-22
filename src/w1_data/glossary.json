@@ -1,0 +1,1841 @@
+[
+  {
+    "canonical": "Akshar",
+    "aliases": [
+      "Akshar"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Imperishable; second-highest of five eternal realities; also called Aksharbrahma",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Akshardham",
+    "aliases": [
+      "Akshardham"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Highest divine abode of Bhagwan Swaminarayan (NEVER \"divine abode\")",
+    "never_alternatives": [
+      "divine abode"
+    ]
+  },
+  {
+    "canonical": "akshar-mukta",
+    "aliases": [
+      "akshar-mukta"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "A jiva that has attained ultimate liberation in Akshardham",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Akshar-Purush",
+    "aliases": [
+      "Akshar-Purush"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Also called Maha-Purush, Mul-Purush, or simply Purush",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "aksharrup",
+    "aliases": [
+      "aksharrup"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "One with qualities of Akshar; highest spiritual state",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "atma",
+    "aliases": [
+      "atma"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Soul / individual self, distinct from physical, subtle, and causal bodies",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Parabrahma",
+    "aliases": [
+      "Parabrahma"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Supreme Being; Bhagwan Swaminarayan; also called Paramatma, Purushottam",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Purushottam",
+    "aliases": [
+      "Purushottam"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Supreme Being, God; always manifest on earth in human form",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jiva",
+    "aliases": [
+      "jiva"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Individual soul; one of the five eternal realities; bound by maya",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "ishwar",
+    "aliases": [
+      "ishwar"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Cosmic being; divine beings governing realms; one of five eternal realities",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "maya",
+    "aliases": [
+      "maya"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Cosmic illusion; root cause of ignorance; one of five eternal realities",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Prakruti",
+    "aliases": [
+      "Prakruti"
+    ],
+    "category": "CORE DOCTRINAL TERMS",
+    "definition": "Primal divine energy; feminine; composed of three gunas",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "antahkaran",
+    "aliases": [
+      "antahkaran"
+    ],
+    "category": "INNER FACULTIES & STATES",
+    "definition": "Inner faculty (mind, buddhi, chitt, ahamkar collectively)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "ahamkar",
+    "aliases": [
+      "ahamkar"
+    ],
+    "category": "INNER FACULTIES & STATES",
+    "definition": "Ego; sense of individual existence",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "buddhi",
+    "aliases": [
+      "buddhi"
+    ],
+    "category": "INNER FACULTIES & STATES",
+    "definition": "Intellect; faculty for discernment and forming convictions",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "chitt",
+    "aliases": [
+      "chitt"
+    ],
+    "category": "INNER FACULTIES & STATES",
+    "definition": "Contemplative faculty; responsible for focusing and storing impressions",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "man",
+    "aliases": [
+      "man"
+    ],
+    "category": "INNER FACULTIES & STATES",
+    "definition": "Mind; generates thoughts and desires; governs indriyas",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "indriyas",
+    "aliases": [
+      "indriyas"
+    ],
+    "category": "INNER FACULTIES & STATES",
+    "definition": "Ten sense organs (five of perception, five of action)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "vrutti",
+    "aliases": [
+      "vrutti"
+    ],
+    "category": "INNER FACULTIES & STATES",
+    "definition": "Movement of awareness; attention of the mind or sense organs",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "bhakti",
+    "aliases": [
+      "bhakti"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Devotion to God",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dharma",
+    "aliases": [
+      "dharma"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Righteousness; cosmic/moral order; religious duty",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dhyan",
+    "aliases": [
+      "dhyan"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Meditation",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "katha",
+    "aliases": [
+      "katha"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Spiritual discourse / scripture reading",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "kirtan",
+    "aliases": [
+      "kirtan"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Devotional hymn / song",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "moksha",
+    "aliases": [
+      "moksha"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Liberation; release from cycle of births and deaths",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "seva",
+    "aliases": [
+      "seva"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Selfless service to God, guru, or devotees (NEVER just \"service\")",
+    "never_alternatives": [
+      "service"
+    ]
+  },
+  {
+    "canonical": "satsang",
+    "aliases": [
+      "satsang"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Holy fellowship; BAPS spiritual community (NEVER \"fellowship\")",
+    "never_alternatives": [
+      "fellowship"
+    ]
+  },
+  {
+    "canonical": "shastra",
+    "aliases": [
+      "shastra"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Sacred scripture (NEVER just \"scripture\" in spiritual context)",
+    "never_alternatives": [
+      "scripture"
+    ]
+  },
+  {
+    "canonical": "mukhpath",
+    "aliases": [
+      "mukhpath"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Memorised recitation of sacred texts (NEVER \"recitation\")",
+    "never_alternatives": [
+      "recitation"
+    ]
+  },
+  {
+    "canonical": "arti",
+    "aliases": [
+      "arti"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Hindu ritual of waving lighted wicks before murti (NEVER \"aarti\")",
+    "never_alternatives": [
+      "aarti"
+    ]
+  },
+  {
+    "canonical": "vichran",
+    "aliases": [
+      "vichran"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Spiritual travels of a guru or sadhu (BAPS spelling; NEVER \"vicharan\")",
+    "never_alternatives": [
+      "vicharan"
+    ]
+  },
+  {
+    "canonical": "mandir",
+    "aliases": [
+      "mandir"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Sanctified place of worship (NEVER \"temple\")",
+    "never_alternatives": [
+      "temple"
+    ]
+  },
+  {
+    "canonical": "murti",
+    "aliases": [
+      "murti"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Consecrated sacred image of God",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "prasad",
+    "aliases": [
+      "prasad"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Sanctified food blessed by being offered to God",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "thal",
+    "aliases": [
+      "thal"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Food offering presented to God with devotion",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "pujan",
+    "aliases": [
+      "pujan"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Worship performed with sacred items",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "pradakshina",
+    "aliases": [
+      "pradakshina"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Ritual circumambulation of a sacred object clockwise",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "diksha",
+    "aliases": [
+      "diksha"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Spiritual initiation into the renunciant order",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "kanthi",
+    "aliases": [
+      "kanthi"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Double-stranded tulsi bead necklace worn by initiated devotees",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "tilak",
+    "aliases": [
+      "tilak"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "U-shaped sacred mark on forehead with sandalwood paste",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "chandlo",
+    "aliases": [
+      "chandlo"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Auspicious vermilion mark on forehead as sign of devotion",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dandvat",
+    "aliases": [
+      "dandvat"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Full prostration as a form of respectful greeting or worship",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "samadhi",
+    "aliases": [
+      "samadhi"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Highest meditative state; also tomb/memorial of a great saint",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "yagna",
+    "aliases": [
+      "yagna"
+    ],
+    "category": "SPIRITUAL PRACTICE",
+    "definition": "Vedic fire sacrifice; ceremonial worship ritual",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "brahmand",
+    "aliases": [
+      "brahmand"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Individual universe comprising 14 realms",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "guna",
+    "aliases": [
+      "guna"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Quality of Prakruti; three types: sattva, rajas, tamas",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "sattva",
+    "aliases": [
+      "sattva",
+      "sattvagun"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Purity, clarity, goodness",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "rajas",
+    "aliases": [
+      "rajas",
+      "rajogun"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Activity, passion, restlessness",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "tamas",
+    "aliases": [
+      "tamas",
+      "tamogun"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Darkness, inertia, ignorance",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "gunatit",
+    "aliases": [
+      "gunatit"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "One who has transcended all three gunas of maya",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "mahattattva",
+    "aliases": [
+      "mahattattva"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Cosmic intelligence; first principle from Pradhan and Purush",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "tanmatra",
+    "aliases": [
+      "tanmatra"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Five subtle elements from which gross elements emerge",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "bhut",
+    "aliases": [
+      "bhut",
+      "mahabhuts"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Five gross elements (pruthvi, jal, tej, vayu, akash)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "akash",
+    "aliases": [
+      "akash"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Space/ether; one of five gross elements",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "pruthvi",
+    "aliases": [
+      "pruthvi"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Earth; one of five gross elements",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jal",
+    "aliases": [
+      "jal"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Water; one of five gross elements",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "tej",
+    "aliases": [
+      "tej"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Fire/energy; one of five gross elements",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "vayu",
+    "aliases": [
+      "vayu"
+    ],
+    "category": "COSMIC STRUCTURE",
+    "definition": "Air; one of five gross elements",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Patal",
+    "aliases": [
+      "Patal"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Lowest realm where serpents reside",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Atal",
+    "aliases": [
+      "Atal"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "First realm beneath Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Vital",
+    "aliases": [
+      "Vital"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Second realm beneath Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Sutal",
+    "aliases": [
+      "Sutal"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Third realm beneath Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Talatal",
+    "aliases": [
+      "Talatal"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Fourth realm beneath Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Mahatal",
+    "aliases": [
+      "Mahatal"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Fifth realm below Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Rasatal",
+    "aliases": [
+      "Rasatal"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Sixth realm beneath Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Mrutyulok",
+    "aliases": [
+      "Mrutyulok"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Realm of death; mortal realm; only realm where liberation is possible",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Bhuvarlok",
+    "aliases": [
+      "Bhuvarlok"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "First realm above Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Swarglok",
+    "aliases": [
+      "Swarglok"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Second realm above Mrutyulok (also Indralok)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Maharlok",
+    "aliases": [
+      "Maharlok"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Third realm above Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Janlok",
+    "aliases": [
+      "Janlok"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Fourth realm above Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Taplok",
+    "aliases": [
+      "Taplok"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Fifth realm above Mrutyulok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Satyalok",
+    "aliases": [
+      "Satyalok"
+    ],
+    "category": "REALMS (14-realm system, bottom to top)",
+    "definition": "Highest realm; Realm of Brahma; also Brahmalok",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "yug",
+    "aliases": [
+      "yug"
+    ],
+    "category": "AGES & TIME",
+    "definition": "Cosmic age; four ages: Satya-yug, Treta-yug, Dwapar-yug, Kali-yug",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Kali-yug",
+    "aliases": [
+      "Kali-yug"
+    ],
+    "category": "AGES & TIME",
+    "definition": "Current age; Age of Darkness; 432,000 human years",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "kalp",
+    "aliases": [
+      "kalp"
+    ],
+    "category": "AGES & TIME",
+    "definition": "Day of Brahma; 4.32 billion human years",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "parardh",
+    "aliases": [
+      "parardh"
+    ],
+    "category": "AGES & TIME",
+    "definition": "Half lifespan of Brahma; 1 x 10^17 human years",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "maharaj",
+    "aliases": [
+      "maharaj"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Revered title for Bhagwan Swaminarayan",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Shriji Maharaj",
+    "aliases": [
+      "Shriji Maharaj"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Bhagwan Swaminarayan (always TWO words; NEVER \"Shrijimaharaj\")",
+    "never_alternatives": [
+      "Shrijimaharaj"
+    ]
+  },
+  {
+    "canonical": "Swamishri",
+    "aliases": [
+      "Swamishri"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Revered address for the current/previous spiritual successor",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "paramhansa",
+    "aliases": [
+      "paramhansa"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Highest order of male sadhu; BAPS renunciant",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "parshad",
+    "aliases": [
+      "parshad"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Male renunciant who wears white robes",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Satpurush",
+    "aliases": [
+      "Satpurush"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "True spiritual guide; manifest form of Aksharbrahma on earth",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "acharya",
+    "aliases": [
+      "acharya"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Spiritual teacher who upholds scriptural teachings within a tradition",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "sadhu",
+    "aliases": [
+      "sadhu"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Ascetic or monk who has renounced worldly life",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "sannyasi",
+    "aliases": [
+      "sannyasi"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Person who has renounced all worldly duties; ascetic",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "rishi",
+    "aliases": [
+      "rishi"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Ancient sage or seer; one who has received divine revelations",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Bhakta",
+    "aliases": [
+      "Bhakta"
+    ],
+    "category": "TITLES & PERSONS",
+    "definition": "Ideal devotee of God, referring to the Satpurush",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Vachanamrut",
+    "aliases": [
+      "Vachanamrut"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "273 recorded divine discourses of Bhagwan Swaminarayan",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Shikshapatri",
+    "aliases": [
+      "Shikshapatri"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "212 Sanskrit verses by Bhagwan Swaminarayan; code of conduct",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Vedas",
+    "aliases": [
+      "Vedas"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Most sacred Hindu shastras; four parts: Rig, Sam, Yajur, Atharva",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Upanishads",
+    "aliases": [
+      "Upanishads"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Final portion of the Vedas; metaphysical knowledge",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Bhagavad Gita",
+    "aliases": [
+      "Bhagavad Gita"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Discourse of Bhagwan Krishna to Arjun; foundational shastra",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Ramayan",
+    "aliases": [
+      "Ramayan"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Epic of Shri Ram's life, exile, and return",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Mahabharat",
+    "aliases": [
+      "Mahabharat"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Great epic; includes the Bhagavad Gita",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Shrimad Bhagvat",
+    "aliases": [
+      "Shrimad Bhagvat"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Most popular of 18 Purans; life of Bhagwan Krishna",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Purans",
+    "aliases": [
+      "Purans"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "18 shastras recording ancient Hindu narratives and teachings",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Smrutis",
+    "aliases": [
+      "Smrutis"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Remembered shastras; include Purans, epics, Dharma-shastras",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Vyas Sutras",
+    "aliases": [
+      "Vyas Sutras"
+    ],
+    "category": "SCRIPTURES",
+    "definition": "Esoteric aphorisms expounding essence of Upanishads",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Darshans",
+    "aliases": [
+      "Darshans"
+    ],
+    "category": "PHILOSOPHICAL SCHOOLS",
+    "definition": "Six classical systems of Hindu philosophy",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Vedanta",
+    "aliases": [
+      "Vedanta"
+    ],
+    "category": "PHILOSOPHICAL SCHOOLS",
+    "definition": "Schools of thought from the Upanishads",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Advaita",
+    "aliases": [
+      "Advaita"
+    ],
+    "category": "PHILOSOPHICAL SCHOOLS",
+    "definition": "Non-dual philosophy; ultimate reality is one",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Dvaita",
+    "aliases": [
+      "Dvaita"
+    ],
+    "category": "PHILOSOPHICAL SCHOOLS",
+    "definition": "Dualistic philosophy; eternal distinction between jiva and God",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Sankhya",
+    "aliases": [
+      "Sankhya"
+    ],
+    "category": "PHILOSOPHICAL SCHOOLS",
+    "definition": "Philosophy emphasizing enumeration of 25 tattvas",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "nitya-pralay",
+    "aliases": [
+      "nitya-pralay"
+    ],
+    "category": "DISSOLUTION TYPES",
+    "definition": "Constant dissolution; daily death of beings",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "nimitta-pralay",
+    "aliases": [
+      "nimitta-pralay"
+    ],
+    "category": "DISSOLUTION TYPES",
+    "definition": "Stimulated dissolution; destruction of lower 10 realms",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "prakrut-pralay",
+    "aliases": [
+      "prakrut-pralay"
+    ],
+    "category": "DISSOLUTION TYPES",
+    "definition": "General dissolution; destruction of all 14 realms",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "atyantik-pralay",
+    "aliases": [
+      "atyantik-pralay"
+    ],
+    "category": "DISSOLUTION TYPES",
+    "definition": "Final dissolution; only Purushottam, Akshar, akshar-muktas remain",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "angarkhu",
+    "aliases": [
+      "angarkhu"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Traditional Indian upper garment with long sleeves",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dagli",
+    "aliases": [
+      "dagli"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Sewn upper garment, pleated at chest, shorter than angarkhu",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dhotiyu",
+    "aliases": [
+      "dhotiyu"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Unstitched lower garment wrapped around waist and legs",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "bokani",
+    "aliases": [
+      "bokani"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Cloth wrapped to cover head, ears, and cheeks",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "pagh",
+    "aliases": [
+      "pagh"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Traditional Indian headgear; turban",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "rotlo",
+    "aliases": [
+      "rotlo",
+      "rotla",
+      "rotli"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Unleavened flatbread of Gujarat, from millet flour",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "khichdi",
+    "aliases": [
+      "khichdi"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Simple dish of spiced rice and lentils cooked together",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dal",
+    "aliases": [
+      "dal"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Spiced lentil soup, a staple food in Indian cuisine",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dudhpak",
+    "aliases": [
+      "dudhpak"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Rich delicacy made from sweetened milk and rice with spices",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "laddu",
+    "aliases": [
+      "laddu"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Round sweet made from flour, sugar, and ghee",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "barfi",
+    "aliases": [
+      "barfi"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Indian sweet from condensed milk and sugar",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jalebi",
+    "aliases": [
+      "jalebi"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Deep-fried flour batter in circular shapes soaked in sugar syrup",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "ghebhar",
+    "aliases": [
+      "ghebhar"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Sweet made from ghee, flour, and sugar syrup; spongy texture",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "gau",
+    "aliases": [
+      "gau"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Traditional Indian measure of distance; about 1.5 to 1.75 miles",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "yojan",
+    "aliases": [
+      "yojan"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Measure of distance equalling four gaus; approximately 6-7 km",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "maund",
+    "aliases": [
+      "maund"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Traditional unit of mass in British India; 25-160 pounds",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "darbar",
+    "aliases": [
+      "darbar"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Traditional royal court or palace with central courtyard",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "haveli",
+    "aliases": [
+      "haveli"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Traditional mansion or large townhouse",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dharmashala",
+    "aliases": [
+      "dharmashala"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Rest house for pilgrims and travellers",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "guru parampara",
+    "aliases": [
+      "guru parampara"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Unbroken succession of God-realized spiritual teachers",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "sampradaya",
+    "aliases": [
+      "sampradaya"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Authentic spiritual tradition with unbroken lineage of gurus",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "vartman",
+    "aliases": [
+      "vartman"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Vows/spiritual commitments undertaken by devotees",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "panch vartman",
+    "aliases": [
+      "panch vartman"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Five fundamental vows for initiated followers",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "nishkami vartaman",
+    "aliases": [
+      "nishkami vartaman"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Lifetime eightfold celibacy (precise doctrinal term)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "ekantik dharma",
+    "aliases": [
+      "ekantik dharma"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Fourfold discipline: dharma, jnan, vairagya, bhakti",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "brahmisthiti",
+    "aliases": [
+      "brahmisthiti"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "State of being brahmarup (NEVER \"Brahmic state\")",
+    "never_alternatives": [
+      "Brahmic state"
+    ]
+  },
+  {
+    "canonical": "santmandal",
+    "aliases": [
+      "santmandal"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Collective body of saints (use for group of Swamis)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "bawa",
+    "aliases": [
+      "bawa"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Ascetic or sadhu; used for impostor/fraudulent religious figures",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "devotee",
+    "aliases": [
+      "devotee"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Standard English for haribhakta (NEVER \"haribhakta\" in output)",
+    "never_alternatives": [
+      "haribhakta"
+    ]
+  },
+  {
+    "canonical": "prasadi",
+    "aliases": [
+      "prasadi",
+      "prasadik"
+    ],
+    "category": "CULTURAL & MATERIAL TERMS",
+    "definition": "Sanctified by a holy person's presence or use",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "annakut",
+    "aliases": [
+      "annakut"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Grand offering of many food dishes before the murti of God",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "bhagvati diksha",
+    "aliases": [
+      "bhagvati diksha"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Sacred initiation into the sadhu order; receiving saffron robes",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "brahmacharya",
+    "aliases": [
+      "brahmacharya"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Celibacy; eightfold celibacy and immersion in Parabrahma",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Chaturmas",
+    "aliases": [
+      "Chaturmas"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Four holy months of monsoon for additional spiritual observances",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "dandvat",
+    "aliases": [
+      "dandvat",
+      "sashtang dandvat"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Full prostration (eight body parts touching ground)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "divyabhav",
+    "aliases": [
+      "divyabhav"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Devotional attitude of perceiving divine qualities in God and His Sadhu",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Fuldol",
+    "aliases": [
+      "Fuldol"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Festival of colours",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "guruhari",
+    "aliases": [
+      "guruhari"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "God's manifestation in the form of the guru",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "guru parampara",
+    "aliases": [
+      "guru parampara"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Unbroken succession of God-realized spiritual teachers",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jnan",
+    "aliases": [
+      "jnan"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Spiritual knowledge; wisdom",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "mahapuja",
+    "aliases": [
+      "mahapuja"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Elaborate worship offered to Bhagwan Swaminarayan and muktas",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "murti-pratishtha",
+    "aliases": [
+      "murti-pratishtha"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Traditional Vedic ceremony consecrating murtis in a mandir",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "nirdosh buddhi",
+    "aliases": [
+      "nirdosh buddhi"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Seeing God, guru, and devotees as flawless",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "parayan",
+    "aliases": [
+      "parayan"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Recitation of or discourse on sacred texts over several days",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "pranayam",
+    "aliases": [
+      "pranayam"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Regulation of breath; fourth stage of ashtanga yoga",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Satpurush",
+    "aliases": [
+      "Satpurush"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "True spiritual guide; manifest form of Aksharbrahma on earth",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "shikharbaddha",
+    "aliases": [
+      "shikharbaddha"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Mandir with pinnacles; five daily artis and regular worship",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "shloka",
+    "aliases": [
+      "shloka"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Sanskrit verse, typically consisting of two lines with specific metre",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "vairagya",
+    "aliases": [
+      "vairagya"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Detachment from worldly pleasures; one of four attributes of ekantik dharma",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Samvat",
+    "aliases": [
+      "Samvat"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Hindu calendar era (Vikram Samvat), ~57 years ahead of Gregorian",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "charanarvind",
+    "aliases": [
+      "charanarvind"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Holy footprints of God or guru",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "nishchay",
+    "aliases": [
+      "nishchay"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Determined faith; absolute conviction in God",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "pragat",
+    "aliases": [
+      "pragat"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Manifest; visibly present (referring to God's incarnation on earth)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "avatari",
+    "aliases": [
+      "avatari"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "The supreme source from whom all divine incarnations manifest",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Dham",
+    "aliases": [
+      "Dham"
+    ],
+    "category": "ADDITIONAL CULTURAL & RITUAL TERMS (from Master Glossary pp.22-52)",
+    "definition": "Short form for Akshardham, abode of Bhagwan Swaminarayan",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "adharma",
+    "aliases": [
+      "adharma"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Opposite of dharma; unrighteousness; immorality",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "adhibhut",
+    "aliases": [
+      "adhibhut"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "The physical world; everything material made from the five elements",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "adhidev",
+    "aliases": [
+      "adhidev"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Cosmic forces or deities that control nature and one's senses",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "adhyatma",
+    "aliases": [
+      "adhyatma"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "The inner self; mind, thoughts, feelings, and the jiva's inner world",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "antaryami",
+    "aliases": [
+      "antaryami"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Inner controller; God's power to reside within jiva, ishwar, and control actions",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "anvay",
+    "aliases": [
+      "anvay"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Connected; immanent; when used for God, implies inherently existing within",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "avidya",
+    "aliases": [
+      "avidya"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Synonymous with maya; false understanding of reality; ignorance",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "avyakrut",
+    "aliases": [
+      "avyakrut"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Causal body of Virat-Purush and other ishwars",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Brahma (Akshar)",
+    "aliases": [
+      "Brahma (Akshar)"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Second-highest of five eternal realities (NOT the creator deity Brahma)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Brahma (creator)",
+    "aliases": [
+      "Brahma (creator)"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "The ishwar who creates the brahmand; part of trinity with Vishnu and Shiv",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "brahmasatta",
+    "aliases": [
+      "brahmasatta"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Formless aspect of Brahma (Chidakash); also refers to atma as eternal existence",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Brahmamahol",
+    "aliases": [
+      "Brahmamahol"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Palace/abode of God (Akshardham); formless chaitanya form of Akshar",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "brahmarandhra",
+    "aliases": [
+      "brahmarandhra"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Mystical opening in crown of head; jiva exits here on death or during samadhi",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Chidakash",
+    "aliases": [
+      "Chidakash"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Formless, pure, all-pervading conscious form of Akshar; luminous and eternal",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "chaitanya",
+    "aliases": [
+      "chaitanya"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Consciousness; the essence of the atma; higher awareness beyond the physical",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jad",
+    "aliases": [
+      "jad"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Non-living, inanimate; opposite of chaitanya; without consciousness",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jad prakruti",
+    "aliases": [
+      "jad prakruti"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Inanimate constituents of the world; the eight elements from Pradhan-Prakruti",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "drashta",
+    "aliases": [
+      "drashta"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "The seer or observer; typically the atma; also God as inner observer",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "drashya",
+    "aliases": [
+      "drashya"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Visible; object of perception; the physical body or visible world",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "kartum",
+    "aliases": [
+      "kartum"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Divine power of God to eclipse infinite muktas by his own light",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "akartum",
+    "aliases": [
+      "akartum"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Divine power of God to exercise restraint in eclipsing muktas",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "anyatha-kartum",
+    "aliases": [
+      "anyatha-kartum"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Divine power of God to eclipse even Akshar and uphold muktas independently",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "kshetra",
+    "aliases": [
+      "kshetra"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "\"Field\"; the body or material realm over which the self presides",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "kshetragna",
+    "aliases": [
+      "kshetragna"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "\"Knower of the field\"; the soul (atma) that presides over the body",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "karan",
+    "aliases": [
+      "karan"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Causal; the causal body of the jiva; desires or maya that cause rebirth",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jnan-pralay",
+    "aliases": [
+      "jnan-pralay"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "State where all mayik influences dissolve through spiritual knowledge",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jnan-indriyas",
+    "aliases": [
+      "jnan-indriyas"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Five cognitive senses (eyes, ears, nose, tongue, skin)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "karma-indriyas",
+    "aliases": [
+      "karma-indriyas"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Five conative senses (hands, feet, speech, genitals, anus)",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "hrudayakash",
+    "aliases": [
+      "hrudayakash"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Spiritual space within the heart; seat of the inner self",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Itihas",
+    "aliases": [
+      "Itihas"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "History; the two Indian epics (Ramayan, Mahabharat); part of Smruti",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "ishtadev",
+    "aliases": [
+      "ishtadev"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Chosen deity; the form of God one feels closest to and worships",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "jivatma",
+    "aliases": [
+      "jivatma"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Individual soul; jiva",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "kusangi",
+    "aliases": [
+      "kusangi"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Person in bad company; bad influence on spiritual progress; leads astray from satsang",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "mahamaya",
+    "aliases": [
+      "mahamaya"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Also called Mul-maya, Mul-Prakruti, or simply Prakruti",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "nishkam",
+    "aliases": [
+      "nishkam"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Devoid of worldly desires; celibate; one who acts without attachment",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "ekta",
+    "aliases": [
+      "ekta"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Unity, oneness, harmony",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "Guna-vibhag",
+    "aliases": [
+      "Guna-vibhag"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Bhagwan Krishna's final teachings to Uddhav on the three gunas",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "prans",
+    "aliases": [
+      "prans"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Vital airs; life force flowing within the body's primary currents",
+    "never_alternatives": []
+  },
+  {
+    "canonical": "swabhav",
+    "aliases": [
+      "swabhav"
+    ],
+    "category": "CRITICAL DOCTRINAL DISTINCTIONS (from Master Glossary pp.1-10)",
+    "definition": "Person's nature; habits from repeated actions in this or past births",
+    "never_alternatives": []
+  }
+]

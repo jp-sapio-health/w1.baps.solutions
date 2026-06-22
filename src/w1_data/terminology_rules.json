@@ -1,0 +1,955 @@
+[
+  {
+    "rule_id": "sacred_terminology:000",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bsaints\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "S",
+      "if_match": "Swamis",
+      "else": "swamis"
+    },
+    "label": "saint(s)→Swami(s)"
+  },
+  {
+    "rule_id": "sacred_terminology:001",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bsaint\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "S",
+      "if_match": "Swami",
+      "else": "swami"
+    },
+    "label": "saint→Swami"
+  },
+  {
+    "rule_id": "sacred_terminology:002",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bmonks\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "M",
+      "if_match": "Swamis",
+      "else": "swamis"
+    },
+    "label": "monk(s)→Swami(s)"
+  },
+  {
+    "rule_id": "sacred_terminology:003",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bmonk\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "M",
+      "if_match": "Swami",
+      "else": "swami"
+    },
+    "label": "monk→Swami"
+  },
+  {
+    "rule_id": "sacred_terminology:004",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\btemples\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "T",
+      "if_match": "Mandirs",
+      "else": "mandirs"
+    },
+    "label": "temple(s)→mandir(s)"
+  },
+  {
+    "rule_id": "sacred_terminology:005",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\btemple\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "T",
+      "if_match": "Mandir",
+      "else": "mandir"
+    },
+    "label": "temple→mandir"
+  },
+  {
+    "rule_id": "sacred_terminology:006",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bharibhaktas\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "devotees"
+    },
+    "label": "haribhakta(s)→devotee(s)"
+  },
+  {
+    "rule_id": "sacred_terminology:007",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bharibhakta\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "devotee"
+    },
+    "label": "haribhakta→devotee"
+  },
+  {
+    "rule_id": "sacred_terminology:008",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bfollowers\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "F",
+      "if_match": "Devotees",
+      "else": "devotees"
+    },
+    "label": "follower(s)→devotee(s)"
+  },
+  {
+    "rule_id": "sacred_terminology:009",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bfollower\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "F",
+      "if_match": "Devotee",
+      "else": "devotee"
+    },
+    "label": "follower→devotee"
+  },
+  {
+    "rule_id": "sacred_terminology:010",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bpenance\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "austerities"
+    },
+    "label": "penance→austerities"
+  },
+  {
+    "rule_id": "sacred_terminology:011",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\btorchbearer\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "successor"
+    },
+    "label": "torchbearer→successor"
+  },
+  {
+    "rule_id": "sacred_terminology:012",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\baarti\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "arti"
+    },
+    "label": "aarti→arti"
+  },
+  {
+    "rule_id": "sacred_terminology:013",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bvicharan\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "vichran"
+    },
+    "label": "vicharan→vichran"
+  },
+  {
+    "rule_id": "sacred_terminology:014",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bdhotiyos\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "dhotiyas"
+    },
+    "label": "dhotiyos→dhotiyas"
+  },
+  {
+    "rule_id": "sacred_terminology:015",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bBrahmic state\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "brahmisthiti"
+    },
+    "label": "Brahmic state→brahmisthiti"
+  },
+  {
+    "rule_id": "sacred_terminology:016",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bscriptures\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "S",
+      "if_match": "Shastras",
+      "else": "shastras"
+    },
+    "label": "scripture(s)→shastra(s)"
+  },
+  {
+    "rule_id": "sacred_terminology:017",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bscripture\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "S",
+      "if_match": "Shastra",
+      "else": "shastra"
+    },
+    "label": "scripture→shastra"
+  },
+  {
+    "rule_id": "sacred_terminology:018",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bcongregation\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "satsang"
+    },
+    "label": "congregation→satsang"
+  },
+  {
+    "rule_id": "sacred_terminology:019",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bHindu mythology\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "Hindu sacred history"
+    },
+    "label": "Hindu mythology→Hindu sacred history"
+  },
+  {
+    "rule_id": "sacred_terminology:020",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bmythology\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "sacred history"
+    },
+    "label": "mythology→sacred history"
+  },
+  {
+    "rule_id": "sacred_terminology:021",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bLord Swaminarayan\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Bhagwan Swaminarayan"
+    },
+    "label": "Lord Swaminarayan→Bhagwan Swaminarayan"
+  },
+  {
+    "rule_id": "sacred_terminology:022",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bdivine abode\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "Akshardham"
+    },
+    "label": "divine abode→Akshardham"
+  },
+  {
+    "rule_id": "sacred_terminology:023",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bShrijimaharaj\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Shriji Maharaj"
+    },
+    "label": "Shrijimaharaj→Shriji Maharaj"
+  },
+  {
+    "rule_id": "sacred_terminology:024",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bShri Ji Maharaj\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Shriji Maharaj"
+    },
+    "label": "Shri Ji Maharaj→Shriji Maharaj"
+  },
+  {
+    "rule_id": "sacred_terminology:025",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bsadhus\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "S",
+      "if_match": "Swamis",
+      "else": "swamis"
+    },
+    "label": "sadhu(s)→Swami(s)"
+  },
+  {
+    "rule_id": "sacred_terminology:026",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bsadhu\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "case_preserve",
+      "when_first_char": "S",
+      "if_match": "Swami",
+      "else": "swami"
+    },
+    "label": "sadhu→Swami"
+  },
+  {
+    "rule_id": "sacred_terminology:027",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bsannyasis\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "bawas"
+    },
+    "label": "sannyasis→bawas"
+  },
+  {
+    "rule_id": "sacred_terminology:028",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bsannyasi\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "bawa"
+    },
+    "label": "sannyasi→bawa"
+  },
+  {
+    "rule_id": "sacred_terminology:029",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bavatari personage\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "avatari Purush"
+    },
+    "label": "avatari personage→avatari Purush"
+  },
+  {
+    "rule_id": "sacred_terminology:030",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bavataric Purush\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "avatari Purush"
+    },
+    "label": "avataric Purush→avatari Purush"
+  },
+  {
+    "rule_id": "sacred_terminology:031",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\bfellowship\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "satsang"
+    },
+    "label": "fellowship→satsang"
+  },
+  {
+    "rule_id": "sacred_terminology:032",
+    "family": "sacred_terminology",
+    "modes": [
+      "dictation",
+      "document"
+    ],
+    "pattern": "\\brecitation\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "mukhpath"
+    },
+    "label": "recitation→mukhpath"
+  },
+  {
+    "rule_id": "personal_name:000",
+    "family": "personal_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bBhilalbhai\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Bhailalbhai"
+    },
+    "label": "Bhilalbhai→Bhailalbhai"
+  },
+  {
+    "rule_id": "personal_name:001",
+    "family": "personal_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bNarayanda\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Naran’da"
+    },
+    "label": "Narayanda→Naran’da"
+  },
+  {
+    "rule_id": "personal_name:002",
+    "family": "personal_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bNaranda\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Naran’da"
+    },
+    "label": "Naranda→Naran’da"
+  },
+  {
+    "rule_id": "place_name:000",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bPipalana\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Piplana"
+    },
+    "label": "Pipalana→Piplana"
+  },
+  {
+    "rule_id": "place_name:001",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bChanasad\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Chansad"
+    },
+    "label": "Chanasad→Chansad"
+  },
+  {
+    "rule_id": "place_name:002",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bBamangaon\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Bamangam"
+    },
+    "label": "Bamangaon→Bamangam"
+  },
+  {
+    "rule_id": "place_name:003",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bDholiya\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Dhuliya"
+    },
+    "label": "Dholiya→Dhuliya"
+  },
+  {
+    "rule_id": "place_name:004",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bDungara\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Dangara"
+    },
+    "label": "Dungara→Dangara"
+  },
+  {
+    "rule_id": "place_name:005",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bBhadarod\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Bhadrod"
+    },
+    "label": "Bhadarod→Bhadrod"
+  },
+  {
+    "rule_id": "place_name:006",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bChokshi\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Choksi"
+    },
+    "label": "Chokshi→Choksi"
+  },
+  {
+    "rule_id": "place_name:007",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bMumbai Province\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Bombay Province"
+    },
+    "label": "Mumbai Province→Bombay Province"
+  },
+  {
+    "rule_id": "place_name:008",
+    "family": "place_name",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bSaurashtra\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "Kathiawad"
+    },
+    "label": "Saurashtra→Kathiawad"
+  },
+  {
+    "rule_id": "forbidden_vocab:000",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\blegendary\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "renowned"
+    },
+    "label": "forbidden: legendary→renowned"
+  },
+  {
+    "rule_id": "forbidden_vocab:001",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bcharismatic\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "inspiring"
+    },
+    "label": "forbidden: charismatic→inspiring"
+  },
+  {
+    "rule_id": "forbidden_vocab:002",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\brevolutionary\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "transformative"
+    },
+    "label": "forbidden: revolutionary→transformative"
+  },
+  {
+    "rule_id": "forbidden_vocab:003",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\brevolutionised\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "transformed"
+    },
+    "label": "forbidden: revolutionised→transformed"
+  },
+  {
+    "rule_id": "forbidden_vocab:004",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bprogressive\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "devoted"
+    },
+    "label": "forbidden: progressive→devoted"
+  },
+  {
+    "rule_id": "forbidden_vocab:005",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bhumanitarian\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "compassionate"
+    },
+    "label": "forbidden: humanitarian→compassionate"
+  },
+  {
+    "rule_id": "forbidden_vocab:006",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bempowerment\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "spiritual strength"
+    },
+    "label": "forbidden: empowerment→spiritual strength"
+  },
+  {
+    "rule_id": "forbidden_vocab:007",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bstakeholder\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "devotee"
+    },
+    "label": "forbidden: stakeholder→devotee"
+  },
+  {
+    "rule_id": "forbidden_vocab:008",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\brole model\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "ideal"
+    },
+    "label": "forbidden: role model→ideal"
+  },
+  {
+    "rule_id": "forbidden_vocab:009",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bmilestone\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "occasion"
+    },
+    "label": "forbidden: milestone→occasion"
+  },
+  {
+    "rule_id": "forbidden_vocab:010",
+    "family": "forbidden_vocab",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\blife-changing\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": "spiritually transformative"
+    },
+    "label": "forbidden: life-changing"
+  },
+  {
+    "rule_id": "hedging:000",
+    "family": "hedging",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bIt seems that\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": ""
+    },
+    "label": "hedging removed: \"It seems that\""
+  },
+  {
+    "rule_id": "hedging:001",
+    "family": "hedging",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bit seems\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": ""
+    },
+    "label": "hedging removed: \"it seems\""
+  },
+  {
+    "rule_id": "hedging:002",
+    "family": "hedging",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bIt is believed that\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": ""
+    },
+    "label": "hedging removed: \"It is believed that\""
+  },
+  {
+    "rule_id": "hedging:003",
+    "family": "hedging",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bit is said that\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": ""
+    },
+    "label": "hedging removed: \"it is said that\""
+  },
+  {
+    "rule_id": "hedging:004",
+    "family": "hedging",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bPerhaps\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": ""
+    },
+    "label": "hedging removed: \"Perhaps\""
+  },
+  {
+    "rule_id": "hedging:005",
+    "family": "hedging",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bperhaps\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": ""
+    },
+    "label": "hedging removed: \"perhaps\""
+  },
+  {
+    "rule_id": "hedging:006",
+    "family": "hedging",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\bprobably\\b",
+    "flags": "gi",
+    "replacement": {
+      "type": "literal",
+      "value": ""
+    },
+    "label": "hedging removed: \"probably\""
+  },
+  {
+    "rule_id": "date:000",
+    "family": "date",
+    "modes": [
+      "document"
+    ],
+    "pattern": "\\b(January|February|March|April|May|June|July|August|September|October|November|December)\\s+(\\d{1,2}),\\s*(\\d{4})\\b",
+    "flags": "g",
+    "replacement": {
+      "type": "literal",
+      "value": "$2 $1 $3"
+    },
+    "label": "American date→British date format"
+  }
+]

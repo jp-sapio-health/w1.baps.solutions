@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual envs
+.venv/
+venv/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+.import_linter_cache/
+
+# Models (downloaded on install, never committed)
+models/
+*.mlmodelc/
+*.gguf
+*.bin
+
+# Audio fixtures — NEVER commit raw audio (privacy). Only transcripts + scores are committed.
+tests/audio/*.wav
+tests/audio/*.m4a
+tests/audio/*.mp3
+*.wav
+*.m4a
+
+# Local user config / runtime
+config.local.toml
+config.local.yaml
+.DS_Store
+
+# uv
+uv.lock.bak
+
+# Dev scratch (install logs, sample audio, freeze snapshots)
+.dev/
+
+# stale renamed venv (set aside during w4k->W1 rename)
+.venv_old_w4k/
