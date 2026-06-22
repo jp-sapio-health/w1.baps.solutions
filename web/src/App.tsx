@@ -26,7 +26,7 @@ import {
 
 const REPO = "https://github.com/jp-sapio-health/w1.baps.solutions";
 
-// Floating glass navbar — the chrome recipe from the Sapio docs design system (sticky, max-w-4xl,
+// Floating glass navbar: the chrome recipe from the Sapio docs design system (sticky, max-w-4xl,
 // translucent glass pill), with the BAPS logo + W1 wordmark in place of the Sapio mark.
 const GLASS_NAV: CSSProperties = {
   background: "rgba(255,255,255,0.5)",
@@ -66,7 +66,7 @@ const MODES = [
     name: "Dictate",
     badge: "verbatim",
     variant: "secondary" as const,
-    desc: "Exactly what you said — no terminology changes. The clinical-safe default.",
+    desc: "Exactly what you said, with no terminology changes. The clinical-safe default.",
   },
   {
     name: "Default",
@@ -78,7 +78,7 @@ const MODES = [
     name: "Clean +",
     badge: "editorial",
     variant: "info" as const,
-    desc: "Default, plus a light tidy-up — filler removal, place and date casing.",
+    desc: "Default, plus a light tidy-up: filler removal, place and date casing.",
   },
   {
     name: "Gujarati (katha)",
@@ -117,7 +117,7 @@ function Hero() {
         <h1>Local, private dictation.</h1>
         <p className="lede">
           Press a key, speak, it types. Whisper runs <strong>entirely on your Mac</strong> via Apple
-          MLX — no cloud, no account, no subscription.
+          MLX. No cloud, no account, no subscription.
         </p>
         <div className="cta">
           <Button variant="primary" size="lg" onClick={scrollToInstall}>
@@ -127,7 +127,7 @@ function Hero() {
             View source
           </Button>
         </div>
-        <p className="privacy-note">🔒 Nothing — no audio, no text — ever leaves your computer.</p>
+        <p className="privacy-note">🔒 Nothing (no audio, no text) ever leaves your computer.</p>
       </motion.div>
     </section>
   );
@@ -163,9 +163,9 @@ function ControlPanel() {
                   value={mode}
                   onChange={(e) => setMode(e.target.value)}
                   options={[
-                    { value: "raw", label: "Dictate — verbatim" },
-                    { value: "dictation", label: "Default — sacred-aware" },
-                    { value: "document", label: "Clean + — editorial" },
+                    { value: "raw", label: "Dictate (verbatim)" },
+                    { value: "dictation", label: "Default (sacred-aware)" },
+                    { value: "document", label: "Clean + (editorial)" },
                     { value: "gujarati", label: "Gujarati (katha)" },
                   ]}
                 />
@@ -175,7 +175,7 @@ function ControlPanel() {
                 <kbd>Hold Right-Option</kbd>
               </div>
               <Switch
-                label="Confidence gate — never paste low-confidence audio"
+                label="Confidence gate: never paste low-confidence audio"
                 checked={confidence}
                 onChange={setConfidence}
               />
@@ -213,7 +213,7 @@ function ControlPanel() {
           <TabsContent value="about">
             <div className="about">
               <p>
-                <strong>W1 v1.1</strong> — a local, privacy-first macOS dictation app that replaces
+                <strong>W1 v1.1</strong> is a local, privacy-first macOS dictation app that replaces
                 paid tools like Wispr Flow, and knows BAPS Gujarati sacred terminology.
               </p>
             </div>
