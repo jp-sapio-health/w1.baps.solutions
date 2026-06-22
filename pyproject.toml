@@ -39,7 +39,7 @@ dev = [
     "pytest-cov==7.1.0",
     "import-linter==2.11",
 ]
-build = ["py2app==0.28.8"]                  # macOS .app bundling (packaging/build.sh)
+build = ["py2app==0.28.10"]                 # macOS .app bundling (packaging/build.sh)
 
 [project.scripts]
 w1 = "w1_macos.cli:main"

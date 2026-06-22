@@ -18,6 +18,23 @@ from setuptools import setup
 # limit. Raise it before the graph walk.
 sys.setrecursionlimit(10000)
 
+# Workaround for uv/python-build-standalone + py2app: this CPython statically links zlib (it is a
+# builtin — no .so, no __file__). py2app's build_executable unconditionally runs
+# copy_file(zlib.__file__, ...) to seed the bootstrap that unzips site-packages, and crashes with
+# "module 'zlib' has no attribute '__file__'". The bundled interpreter also has zlib builtin, so
+# the copy is vestigial; point __file__ at any real extension .so (a valid Mach-O, so later strip/
+# codesign succeed) and it is simply never loaded.
+import sysconfig as _sysconfig
+import zlib as _zlib
+
+if not getattr(_zlib, "__file__", None):
+    _dynload = Path(_sysconfig.get_config_var("DESTSHARED") or "")
+    _real_so = next(iter(sorted(_dynload.glob("*.so"))), None) if _dynload.is_dir() else None
+    if _real_so is not None:
+        _zlib.__file__ = str(_real_so)
+    else:
+        raise SystemExit("py2app workaround: no extension .so found to stand in for builtin zlib")
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -62,5 +79,6 @@ setup(
     app=APP,
     name="w1",
     options={"py2app": OPTIONS},
-    setup_requires=["py2app"],
+    # NB: no setup_requires — setuptools 80+ rejects the legacy keyword and py2app is already
+    # installed via the build extra. The build venv also pins setuptools < 80 (see build.sh).
 )
