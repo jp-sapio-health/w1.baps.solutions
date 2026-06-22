@@ -2,6 +2,8 @@
 
 <p align="center"><em>Local, privacy-first dictation. Press a key, speak, it types.</em></p>
 
+<p align="center"><a href="https://w1.baps.solutions">w1.baps.solutions</a></p>
+
 > **Is my voice private?** Yes. W1 runs OpenAI's Whisper **entirely on your Mac** via Apple
 > MLX. Nothing — no audio, no text — ever leaves your computer. No cloud, no account, no
 > subscription. It is built to safely handle clinical and personal dictation.
@@ -20,13 +22,19 @@ in correct canonical spelling — while your ordinary English stays exactly as y
 Apple Silicon Mac, [uv](https://docs.astral.sh/uv/) installed:
 
 ```bash
-git clone <repo-url> w1 && cd w1
+git clone https://github.com/jp-sapio-health/w1.baps.solutions.git w1 && cd w1
 ./install.sh          # venv + deps + model download + permission links
-./w1 app             # launch the menu-bar app + floating widget
+./w1 app              # launch the menu-bar app + floating widget
 ```
 
-Then grant **Microphone**, **Accessibility**, and **Input Monitoring** when prompted (the
-installer prints the direct System Settings links). Hold **Right-Option** and speak.
+Then grant **Microphone**, **Accessibility**, and **Input Monitoring** to your terminal
+(System Settings ▸ Privacy & Security — the installer prints the direct links). Hold
+**Right-Option** and speak.
+
+> The global hotkey needs **Input Monitoring**; without it the app runs but never hears the
+> key. Running via `./w1 app` from a terminal that holds those permissions is the supported
+> way to run W1 today. A packaged `.app` build exists (`packaging/`) but its macOS
+> code-signing/permissions story is still being worked out — treat it as experimental.
 
 ## Status
 🚧 **In active development** — see [`PLAN.md`](./PLAN.md) for the full architecture and phased
