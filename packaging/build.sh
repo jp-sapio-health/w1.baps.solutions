@@ -35,10 +35,42 @@ echo "Building dist/W1.app…"
 
 echo "Built: dist/W1.app"
 
+# Code-sign with a real identity when one is available, so macOS TCC grants (Input Monitoring,
+# Accessibility) attach to a STABLE code identity and survive rebuilds. Without this the bundle is
+# ad-hoc/linker-signed and the key listener silently gets no events. Set W1_SIGN_IDENTITY to a
+# codesigning identity (see `security find-identity -v -p codesigning`); falls back to the first
+# "Apple Development" identity in the keychain. Leaves the ad-hoc signature if none is found.
+SIGN_ID="${W1_SIGN_IDENTITY:-$(security find-identity -v -p codesigning 2>/dev/null | grep -m1 "Apple Development" | sed -E 's/.*"(.*)"/\1/')}"
+if [ -n "$SIGN_ID" ]; then
+  echo "Signing with: $SIGN_ID"
+  # IMPORTANT: codesign rejects "detritus" xattrs (com.apple.FinderInfo / fileprovider) that
+  # iCloud Drive stamps onto everything under ~/Desktop and ~/Documents. They can't be stripped
+  # in place (iCloud re-applies them), so copy the bundle OUT of iCloud first with ditto (which
+  # drops xattrs/resource forks), sign there, then bring it back. Install/run from the signed
+  # copy or the .dmg — not from the iCloud-synced dist/ (re-syncing would break the seal).
+  SIGNED="$(mktemp -d)/W1.app"
+  ditto --norsrc --noextattr --noacl dist/W1.app "$SIGNED"
+  codesign --force --deep --options runtime \
+    --entitlements "$ROOT/packaging/w1.entitlements" \
+    --identifier health.baps.w1 \
+    --sign "$SIGN_ID" "$SIGNED"
+  codesign --verify --strict "$SIGNED" && echo "Signature OK ($SIGN_ID)"
+  ditto "$SIGNED" dist/W1.app   # mirror back for the .dmg step (dmg is the clean deliverable)
+  echo "$SIGNED" > "$ROOT/dist/.signed-app-path"
+else
+  echo "No codesigning identity found — leaving ad-hoc signature (grants won't persist across rebuilds)."
+fi
+
 if [ "${1:-}" = "--dmg" ]; then
   echo "Creating dist/W1.dmg…"
-  hdiutil create -volname "W1" -srcfolder dist/W1.app -ov -format UDZO dist/W1.dmg
+  # Package from the signed, xattr-free copy when we have one, so the .dmg's bundle keeps a valid
+  # signature (the iCloud-synced dist/W1.app may have been re-stamped with FinderInfo).
+  SRC="dist/W1.app"
+  [ -f "$ROOT/dist/.signed-app-path" ] && SRC="$(cat "$ROOT/dist/.signed-app-path")"
+  hdiutil create -volname "W1" -srcfolder "$SRC" -ov -format UDZO dist/W1.dmg
   echo "Built: dist/W1.dmg"
 fi
 
-echo "Done. First launch: right-click W1.app ▸ Open (unsigned builds) and grant permissions."
+echo "Done. Install: drag W1.app to /Applications, then grant Microphone + Accessibility +"
+echo "Input Monitoring (System Settings ▸ Privacy & Security). Run from /Applications, not the"
+echo "iCloud-synced Desktop (iCloud xattrs can invalidate the signature)."
