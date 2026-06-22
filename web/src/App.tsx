@@ -117,8 +117,7 @@ function Hero() {
         <h1>Local, private dictation.</h1>
         <p className="lede">
           Press a key, speak, it types. Whisper runs <strong>entirely on your Mac</strong> via Apple
-          MLX — no cloud, no account, no subscription. English and BAPS Gujarati sacred terms,
-          fully on-device.
+          MLX — no cloud, no account, no subscription.
         </p>
         <div className="cta">
           <Button variant="primary" size="lg" onClick={scrollToInstall}>
