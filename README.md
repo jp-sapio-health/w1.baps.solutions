@@ -1,4 +1,4 @@
-<h1 align="center">वाणी · W1</h1>
+<h1 align="center">W1</h1>
 
 <p align="center"><em>Local, privacy-first dictation. Press a key, speak, it types.</em></p>
 
