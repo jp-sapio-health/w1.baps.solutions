@@ -59,9 +59,12 @@ PLIST = {
     "LSUIElement": True,  # menu-bar only — no Dock icon
     "LSMinimumSystemVersion": "13.0",
     "NSMicrophoneUsageDescription": (
-        "w1 transcribes your speech entirely on this Mac. Audio never leaves your computer."
+        "W1 transcribes your speech entirely on this Mac. Audio never leaves your computer."
     ),
-    "NSHumanReadableCopyright": "Built for sewa. Private by design.",
+    # Never write .pyc into the signed bundle at runtime; the first launch would otherwise
+    # add files under Contents/Resources and break the codesign seal (and with it the TCC
+    # grants tied to the signature).
+    "LSEnvironment": {"PYTHONDONTWRITEBYTECODE": "1"},
 }
 
 OPTIONS = {
