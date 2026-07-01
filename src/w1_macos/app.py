@@ -146,8 +146,29 @@ class W1App(rumps.App):
 
 def main() -> int:
     app = W1App()
+
+    # Ask macOS for Input Monitoring + Accessibility up front. Without this, pynput's event
+    # tap starts but silently receives no keys, and a grant made against a previous build's
+    # signature never re-prompts. The request registers THIS binary in System Settings.
     try:
-        app.hotkey.start()  # needs Accessibility / Input Monitoring; granted on first run
+        from w1_macos.permissions import ensure_permissions
+
+        perms = ensure_permissions()
+        missing = [k for k, v in perms.items() if v != "granted"]
+        if missing:
+            print(f"[w1] permissions not granted yet: {', '.join(missing)}")
+            rumps.notification(
+                "W1 needs permissions",
+                "The hotkey will not work until these are enabled.",
+                "System Settings > Privacy & Security > "
+                + " and ".join(m.replace("_", " ").title() for m in missing)
+                + ". Enable W1, then choose Relaunch W1 from the menu.",
+            )
+    except Exception as exc:  # permission checks must never stop the app
+        print(f"[w1] permission check failed: {exc}")
+
+    try:
+        app.hotkey.start()  # needs Input Monitoring; requested above
     except Exception as exc:
         print(f"[w1] hotkey listener could not start (grant Input Monitoring): {exc}")
     app.controller.warm_up()

@@ -82,6 +82,38 @@ def _cmd_doctor(_args) -> int:
         print(f"rule data    : {len(d.rules)} rules, {len(d.protected)} protected, {len(d.bias_seed)} bias terms")
     except Exception as e:  # pragma: no cover
         print(f"rule data    : ERROR {e}")
+    try:
+        from w1_macos.permissions import accessibility_status, input_monitoring_status
+
+        print(f"permissions  : input monitoring={input_monitoring_status()}, "
+              f"accessibility={accessibility_status()} (for THIS process)")
+    except Exception as e:  # pragma: no cover
+        print(f"permissions  : ERROR {e}")
+    return 0
+
+
+def _cmd_debug_keys(args) -> int:
+    """Print every key event pynput receives, so hotkey problems are observable."""
+    import time
+
+    from pynput import keyboard
+
+    from w1_macos.permissions import accessibility_status, input_monitoring_status
+
+    print(f"input monitoring={input_monitoring_status()}, accessibility={accessibility_status()}")
+    print(f"listening for {args.seconds:.0f}s: press Right-Option and a few letters...")
+
+    def on_press(k):
+        print(f"  press   {k!r}")
+
+    def on_release(k):
+        print(f"  release {k!r}")
+
+    listener = keyboard.Listener(on_press=on_press, on_release=on_release)
+    listener.start()
+    time.sleep(args.seconds)
+    listener.stop()
+    print("done")
     return 0
 
 
@@ -106,6 +138,10 @@ def main(argv=None) -> int:
 
     doc = sub.add_parser("doctor", help="check the environment")
     doc.set_defaults(func=_cmd_doctor)
+
+    dk = sub.add_parser("debug-keys", help="print every key event the listener receives")
+    dk.add_argument("--seconds", type=float, default=15.0)
+    dk.set_defaults(func=_cmd_debug_keys)
 
     a = sub.add_parser("app", help="launch the menu-bar app + floating widget")
     a.set_defaults(func=_cmd_app)
