@@ -35,6 +35,19 @@ echo "Building dist/W1.app…"
 
 echo "Built: dist/W1.app"
 
+# mlx is a namespace package (no __init__.py), which py2app's packages option cannot collect.
+# Copy it wholesale (compiled extensions + libmlx.dylib + mlx.metallib) before signing so it
+# sits inside the sealed bundle. The self-test below verifies it imports.
+SITE="$("$PY" -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")"
+if [ -d "$SITE/mlx" ]; then
+  echo "Copying mlx (namespace package, excluded from py2app) into the bundle…"
+  # Verbatim copy of the self-contained site-packages layout: core.so resolves its dylibs via
+  # @loader_path/lib, so keeping the directory intact is all that is needed.
+  ditto "$SITE/mlx" "dist/W1.app/Contents/Resources/lib/python3.12/mlx"
+else
+  echo "WARNING: mlx not found in $SITE; bundle will fail its self-test." >&2
+fi
+
 # Code-sign with a real identity when one is available, so macOS TCC grants (Input Monitoring,
 # Accessibility) attach to a STABLE code identity and survive rebuilds. Without this the bundle is
 # ad-hoc/linker-signed and the key listener silently gets no events. Set W1_SIGN_IDENTITY to a
@@ -57,6 +70,14 @@ if [ -n "$SIGN_ID" ]; then
   codesign --verify --strict "$SIGNED" && echo "Signature OK ($SIGN_ID)"
   ditto "$SIGNED" dist/W1.app   # mirror back for the .dmg step (dmg is the clean deliverable)
   echo "$SIGNED" > "$ROOT/dist/.signed-app-path"
+  # Runtime self-test INSIDE the signed bundle: imports the full dictation stack (portaudio,
+  # mlx, mlx_whisper, tokenizer, backend selection). A bundle that launches but cannot dictate
+  # must never ship again.
+  echo "Running bundle self-test…"
+  if ! W1_SELFTEST=1 "$SIGNED/Contents/MacOS/W1"; then
+    echo "BUNDLE SELF-TEST FAILED — aborting." >&2
+    exit 1
+  fi
 else
   echo "No codesigning identity found — leaving ad-hoc signature (grants won't persist across rebuilds)."
 fi

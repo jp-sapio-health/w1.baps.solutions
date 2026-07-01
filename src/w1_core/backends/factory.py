@@ -17,7 +17,10 @@ def select_backend(config: W1Config) -> TranscriptionBackend:
 
     if choice == "mlx" or (choice == "auto" and platform.machine() == "arm64"):
         try:
-            import mlx  # noqa: F401  (presence check only)
+            # mlx is a NAMESPACE package: `import mlx` succeeds even when the compiled core
+            # is missing or its dylib cannot load. Probe the real extension module so a broken
+            # install falls through instead of returning a backend that dies at transcribe time.
+            import mlx.core  # noqa: F401
 
             from .mlx_whisper import MLXWhisperBackend
 

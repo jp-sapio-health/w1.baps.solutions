@@ -64,7 +64,14 @@ class Controller:
 
     # -- recording ------------------------------------------------------------
     def start_recording(self) -> None:
-        import sounddevice as sd
+        # This runs on the pynput callback thread: an uncaught exception here dies silently
+        # and the app just looks unresponsive. Import failures (e.g. portaudio missing from a
+        # bad bundle) must be logged, not swallowed.
+        try:
+            import sounddevice as sd
+        except Exception as exc:
+            print(f"[w1] audio stack unavailable, cannot record: {exc}")
+            return
 
         with self._lock:
             if self._state != "idle":

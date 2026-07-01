@@ -40,12 +40,38 @@ sys.path.insert(0, str(ROOT / "src"))
 
 # torch is an mlx-whisper *weight-conversion* dependency only (torch_whisper.py); MLX inference
 # on the pre-converted model never imports it. Excluding it keeps the bundle small and avoids a
-# 387 MB recursive graph. The other excludes are dev/build noise never needed at runtime.
+# 387 MB recursive graph. numba/llvmlite/scipy must NOT be excluded: mlx_whisper.transcribe
+# imports timing.py unconditionally, which needs both. The rest is dev/build noise.
 EXCLUDES = [
     "torch", "torchvision", "torchaudio",
-    "tensorflow", "numba", "llvmlite",
+    "tensorflow",
     "pytest", "import_linter", "py2app",
     "tkinter", "matplotlib", "IPython",
+    # mlx must be handled OUTSIDE py2app: it is a namespace package whose compiled core.so
+    # gets relocated to lib-dynload/, which breaks both its @loader_path/lib dylib rpath and
+    # its internal imports (mlx._reprlib_fix). build.sh copies site-packages/mlx verbatim into
+    # the bundle instead; that layout is self-contained and identical to the working dev venv.
+    "mlx",
+]
+
+# The dictation runtime closure. w1_core lazy-imports the ML stack inside functions, so
+# py2app's import graph never sees it; every package here is copied wholesale (including data
+# files: libportaudio.dylib in _sounddevice_data, libmlx.dylib + mlx.metallib in mlx/lib,
+# tiktoken's compiled tokenizer). A missing entry means the app launches but dictation dies
+# silently on the hotkey thread; build.sh runs the bundle self-test to catch exactly that.
+RUNTIME_PACKAGES = [
+    "w1_core", "w1_data", "w1_macos",
+    "rumps", "pynput",
+    "sounddevice", "_sounddevice_data", "cffi", "pycparser",
+    # NB: "mlx" itself is a NAMESPACE package (no __init__.py); py2app's packages option
+    # cannot collect it ("No module named 'mlx'"). build.sh copies the mlx directory into
+    # the bundle before signing instead. mlx_whisper is a regular package and stays here.
+    "mlx_whisper",
+    "numba", "llvmlite", "scipy",
+    "tiktoken", "regex",
+    "huggingface_hub", "filelock", "fsspec", "requests",
+    "urllib3", "certifi", "idna", "charset_normalizer",
+    "yaml", "tqdm", "packaging",
 ]
 
 APP = [str(ROOT / "packaging" / "app_main.py")]
@@ -70,8 +96,7 @@ PLIST = {
 OPTIONS = {
     "argv_emulation": False,  # breaks pynput/AppKit event handling — keep off
     "plist": PLIST,
-    "packages": ["w1_core", "w1_data", "w1_macos", "rumps", "pynput", "sounddevice"],
-    # mlx_whisper + mlx are large and dlopen Metal libs; include only if bundling the backend.
+    "packages": RUNTIME_PACKAGES,
     "includes": ["pyperclip"],
     "excludes": EXCLUDES,
     "iconfile": str(ROOT / "assets" / "menubar" / "idle.png"),
