@@ -1,85 +1,135 @@
-<h1 align="center">W1</h1>
+# W1
 
-<p align="center"><em>Local, privacy-first dictation. Press a key, speak, it types.</em></p>
+Local dictation for macOS. Hold Right-Option, speak, release. Corrected text lands in whatever
+app has focus. Everything runs on your Mac: the speech model, the correction rules, the
+transliteration. There is no server, no account, and no network call at runtime.
 
-<p align="center"><a href="https://w1.baps.solutions">w1.baps.solutions</a></p>
+W1 exists because generic dictation mangles BAPS Gujarati. Say "Pramukh Swami Maharaj" to most
+tools and you get three guesses and a spelling lottery. W1 ships a terminology layer built from
+the same rule set that powers the Aksharpith transliteration pipeline, so katha vocabulary comes
+out right, in the ā-only romanisation the sampradāy's publications use.
 
-> **Is my voice private?** Yes. W1 runs OpenAI's Whisper **entirely on your Mac** via Apple
-> MLX. Nothing — no audio, no text — ever leaves your computer. No cloud, no account, no
-> subscription. It is built to safely handle clinical and personal dictation.
+Live site: [w1.baps.solutions](https://w1.baps.solutions)
 
-W1 replaces paid dictation apps (e.g. Wispr Flow) and adds one thing they can't do: it knows
-**BAPS Gujarati sacred terminology**. Speak natural English with terms like *Akshardham,
-Pramukh Swami Maharaj, Vachanamrut, satsang, mandir, murti, darshan* mixed in, and they come out
-in correct canonical spelling — while your ordinary English stays exactly as you said it.
+## Install
+
+Packaged app, if you were given `W1.dmg`: drag W1 to Applications, right-click it, Open. macOS
+asks for Microphone, Accessibility and Input Monitoring. All three are required; Input
+Monitoring is the one people miss, and the hotkey stays dead without it. The menu bar icon
+shows an exclamation mark until every grant is in place.
+
+From source, on a bare Apple Silicon Mac:
 
 ```
-   speak  ──▶  Whisper (MLX, on-device)  ──▶  bilingual correction  ──▶  pasted into any app
-                                              (BAPS terms · never your clinical English)
+git clone https://github.com/jp-sapio-health/w1.baps.solutions.git w1
+cd w1
+./install.sh
+./w1 app
 ```
 
-## Quickstart
-Apple Silicon Mac, [uv](https://docs.astral.sh/uv/) installed:
+`install.sh` installs uv if you do not have it, builds a Python 3.12 virtualenv, pulls the MLX
+wheels, and pre-downloads the model (about 1.5 GB, one time, cached in `~/.cache/huggingface`).
+Grant the same three permissions to your terminal app.
 
-```bash
-git clone https://github.com/jp-sapio-health/w1.baps.solutions.git w1 && cd w1
-./install.sh          # venv + deps + model download + permission links
-./w1 app              # launch the menu-bar app + floating widget
+## The model, and what it was trained on
+
+W1 does not train or fine-tune anything. Recognition is `mlx-community/whisper-large-v3-turbo`,
+a conversion of OpenAI's Whisper large-v3-turbo to Apple's MLX array format, running float16 on
+the Mac's GPU through Metal.
+
+Some provenance, since it matters for a tool aimed at a specific speech community:
+
+- Whisper large-v3 was trained by OpenAI on roughly 1 million hours of weakly labelled audio
+  plus 4 million hours of audio pseudo-labelled by large-v2, spanning 90+ languages. Gujarati
+  is in the training mix, but as a long-tail language: its share of that corpus is small, which
+  is exactly why raw Whisper output needs a domain layer for katha vocabulary.
+- large-v3-turbo is OpenAI's distilled variant: the encoder is unchanged, the decoder is cut
+  from 32 layers to 4, then fine-tuned on the same multilingual transcription data. It keeps
+  most of large-v3's accuracy at a fraction of the decode cost, which is what makes real-time
+  local dictation practical on a laptop.
+- The MLX conversion changes the container, not the numbers: same weights, reformatted for
+  Apple Silicon's unified memory and Metal kernels.
+
+The part W1 does own is data, not weights: a generated dataset compiled from the Aksharpith
+rule files (the Mandir project's TypeScript sources, converted by `scripts/sync_rules_from_ts.py`
+into JSON under `src/w1_data/`). Currently 64 terminology rules, 20 protected terms, and 74
+bias terms. It is used three ways at inference time:
+
+1. **Decoder biasing.** The bias terms are packed into Whisper's `initial_prompt` within its
+   224-token budget, nudging decoding toward sampradāy vocabulary before any correction runs.
+2. **Protected terms.** Names like Swaminarayan are masked before any fuzzy matching, so
+   cleanup can never rewrite them.
+3. **Terminology rules.** Deterministic post-corrections, filtered by mode, applied after
+   cleanup. Rules rather than model output, so they are reviewable and testable.
+
+## Pipeline
+
+One dictation cycle, end to end:
+
+```
+hold Right-Option   mic opens (16 kHz mono float32), live RMS drives the widget waveform
+release             frames concatenate, a worker thread takes over
+transcribe          MLX Whisper, with the bias prompt (skipped in Gujarati mode)
+gate 1: artifacts   known Whisper hallucinations ("thank you.", "[BLANK_AUDIO]") are dropped
+gate 2: confidence  mean no_speech_prob > 0.6 or mean avg_logprob < -1.0 drops the take
+correct             cleanup, protected-term masking, fuzzy OOV snap, terminology rules
+                    (Gujarati mode instead runs the deterministic transliterator)
+paste               into the focused field, clipboard restored; if nothing editable has
+                    focus, a panel floats the text and Cmd+Shift+V pastes it later
 ```
 
-Then grant **Microphone**, **Accessibility**, and **Input Monitoring** to your terminal
-(System Settings ▸ Privacy & Security — the installer prints the direct links). Hold
-**Right-Option** and speak.
+A gated take shows a red X on the widget and pastes nothing. Bad audio producing no text is a
+feature: the gates exist because Whisper hallucinates fluent English on silence.
 
-> The global hotkey needs **Input Monitoring**; without it the app runs but never hears the
-> key. Running via `./w1 app` from a terminal that holds those permissions is the supported
-> way to run W1 today. A packaged `.app` build exists (`packaging/`) but its macOS
-> code-signing/permissions story is still being worked out — treat it as experimental.
+The Gujarati transliterator is not the model. It is a syllable-walking state machine over
+U+0A80 to U+0AFF with word-final schwa deletion and anusvara place assimilation, emitting ASCII
+plus a single diacritic, ā. `મંદિર કથા ભગવાન` comes out as `mandir kathā bhagavān`,
+deterministically, every time.
 
-## Status
-🚧 **In active development** — see [`PLAN.md`](./PLAN.md) for the full architecture and phased
-build. v1 targets a single Mac (Apple Silicon); a signed, packaged app for wider sharing is a
-planned phase.
+## Modes
 
-## How it works
-- **Hotkey:** hold **Right-Option** to talk (push-to-talk), or double-tap to toggle. Fully
-  rebindable. Text is inserted into whatever app is focused.
-- **Four modes,** switchable from the menu bar:
-  - **Dictate** — verbatim; no terminology changes (clinical/normal dictation).
-  - **Default** — corrects BAPS sacred terms, leaves your ordinary English untouched.
-  - **Clean +** — Default plus light editorial tidy-up (filler removal, place/date casing).
-  - **Gujarati (katha)** — transcribes spoken Gujarati and outputs Roman transliteration using
-    the BAPS *ā*-only diacritic rule (keeps the long-*ā* macron, strips all others).
-- **Confidence gate:** if Whisper isn't confident the audio was real speech, nothing is pasted —
-  the widget flashes a red ✕ instead of inserting noise.
-- **Model:** `whisper-large-v3-turbo`, swappable in one config line.
+| Menu label | Behaviour |
+|---|---|
+| Dictate | Verbatim. No deletions, no rewrites. Safe for clinical notes. |
+| Default | Light cleanup plus sacred-term corrections. |
+| Clean + | Adds editorial rules: fillers out, self-corrections resolved. |
+| Gujarati (katha) | Forces Gujarati decoding, outputs ā-only romanisation. |
 
 ## CLI
-| Command | What it does |
-|---------|--------------|
-| `./w1 app` | Launch the menu-bar app + floating widget |
-| `./w1 dictate` | Record from the mic and paste the corrected text |
-| `./w1 transcribe FILE [--mode …]` | Transcribe an audio file |
-| `./w1 correct "text" [--mode …]` | Run text through the correction engine only |
-| `./w1 doctor` | Check environment (deps, model, rule data, permission hints) |
 
-`./w1` runs against the live source tree (no reinstall needed while developing).
-
-## Tests
-```bash
-.venv/bin/python -m pytest tests/ -q                      # unit tests
-.venv/bin/python -m pytest tests/ --cov=w1_core          # with coverage
-.venv/bin/lint-imports                                    # platform-boundary contract
+```
+./w1 app          menu-bar app + floating widget
+./w1 dictate      record from the terminal, print the correction
+./w1 transcribe   run a .wav / .m4a file through the pipeline
+./w1 correct      run text through the correction engine alone
+./w1 doctor       environment, model, rule data, permission status
+./w1 debug-keys   print every key event the listener receives
 ```
 
-## Layout
-`src/w1_core` — portable engine · `src/w1_data` — generated glossary/rule data ·
-`src/w1_macos` — the macOS app · `scripts/` — rule sync, accuracy harness, widget-frame
-generator · `docs/` — setup.
+## Architecture
 
-## Glossary source of truth
-Sacred terminology is **generated** from the Mandir web app's rule files via
-`scripts/sync_rules_from_ts.py` — never hand-edited here.
+```
+src/w1_core    engine: config, pipeline, gates, correction, backends. No macOS imports;
+               an import-linter contract enforces the boundary.
+src/w1_data    the generated JSON dataset described above. Never hand-edited.
+src/w1_macos   menu-bar app, floating widget, hotkey listener, mic capture, paste
+               injection, focus detection, permissions.
+```
 
----
-*Built for sewa. Private by design.*
+52 unit tests cover the gates, the corrector, the transliterator and the bias-prompt budget
+(96% line coverage on w1_core). `packaging/build.sh` will not produce a dmg unless the signed
+bundle passes a 7-point runtime self-test (portaudio, MLX, tokenizer, backend selection) run
+from inside the bundle.
+
+## Troubleshooting
+
+Everything the packaged app does is logged to `~/Library/Logs/W1.log`. If the hotkey does
+nothing, check the menu bar: Permissions shows live grant status and opens the right Settings
+pane. macOS ties permission grants to the app's code signature, so replacing the app bundle
+resets them; grant once, keep the bundle.
+
+## Privacy
+
+Audio is held in memory, transcribed on the GPU, and discarded. Nothing is written to disk
+except the log (text you can read) and the model cache (weights from Hugging Face). The only
+network call W1 ever makes is the one-time model download.

@@ -1,33 +1,12 @@
-import { type CSSProperties, useState } from "react";
-import { motion } from "framer-motion";
-import {
-  Window,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  Button,
-  Badge,
-  Switch,
-  Select,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  TableHeaderCell,
-  useToast,
-} from "@pikoloo/darwin-ui";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
+import { Badge, Button, useToast } from "@pikoloo/darwin-ui";
+import readmeRaw from "../../README.md?raw";
 
 const REPO = "https://github.com/jp-sapio-health/w1.baps.solutions";
+const DMG = `${REPO}/releases/latest/download/W1.dmg`;
 
-// Floating glass navbar: the chrome recipe from the Sapio docs design system (sticky, max-w-4xl,
-// translucent glass pill), with the BAPS logo + W1 wordmark in place of the Sapio mark.
+/* ---------------------------------------------------------------- navbar */
+
 const GLASS_NAV: CSSProperties = {
   background: "rgba(255,255,255,0.5)",
   backdropFilter: "blur(24px) saturate(1.8)",
@@ -50,8 +29,7 @@ function Navbar() {
         </a>
         <nav className="nav-links">
           <a href="#install">Install</a>
-          <a href="#modes">Modes</a>
-          <a href="#how">How it works</a>
+          <a href="#readme">Docs</a>
           <a href={REPO} target="_blank" rel="noreferrer">
             GitHub
           </a>
@@ -61,196 +39,119 @@ function Navbar() {
   );
 }
 
-const MODES = [
-  {
-    name: "Dictate",
-    badge: "verbatim",
-    variant: "secondary" as const,
-    desc: "Exactly what you said, with no terminology changes. The clinical-safe default.",
-  },
-  {
-    name: "Default",
-    badge: "sacred-aware",
-    variant: "primary" as const,
-    desc: "Corrects BAPS Gujarati sacred terms to their canonical spelling, leaving ordinary English untouched.",
-  },
-  {
-    name: "Clean +",
-    badge: "editorial",
-    variant: "info" as const,
-    desc: "Default, plus a light tidy-up: filler removal, place and date casing.",
-  },
-  {
-    name: "Gujarati (katha)",
-    badge: "ā-only Roman",
-    variant: "accent" as const,
-    desc: "Transcribes spoken Gujarati and outputs Roman transliteration with the ā-only diacritic rule.",
-  },
-];
+/* ------------------------------------------------------- hero: live pill */
 
-const STEPS = [
-  { n: "1", t: "Hold Right-Option", d: "Press and speak. A floating pill shows a live waveform." },
-  { n: "2", t: "Whisper, on-device", d: "Apple MLX runs Whisper locally. No audio ever leaves your Mac." },
-  { n: "3", t: "It types", d: "Corrected text is pasted into whatever app is focused." },
-];
+const DEMO_TEXT = "jay svāminārāyan, āje kathā sāras hatī.";
 
-const HISTORY = [
-  { time: "09:41", mode: "Default", text: "We did darshan at the mandir this morning." },
-  { time: "09:38", mode: "Dictate", text: "Patient reports intermittent chest pain on exertion." },
-  { time: "09:32", mode: "Gujarati", text: "jay svāminārāyan, āje kathā sāras hatī." },
-  { time: "09:20", mode: "Clean +", text: "The meeting is on the fourteenth of July in London." },
-];
+/** The app's floating widget, working: hold it (or hold Option) to "listen", release to type. */
+function PillDemo() {
+  const [state, setState] = useState<"idle" | "listening" | "typing" | "done">("idle");
+  const [typed, setTyped] = useState("");
+  const timers = useRef<number[]>([]);
+
+  const clearTimers = () => {
+    timers.current.forEach((t) => window.clearTimeout(t));
+    timers.current = [];
+  };
+
+  const start = () => {
+    if (state === "listening") return;
+    clearTimers();
+    setTyped("");
+    setState("listening");
+  };
+
+  const stop = () => {
+    if (state !== "listening") return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setTyped(DEMO_TEXT);
+      setState("done");
+      return;
+    }
+    setState("typing");
+    DEMO_TEXT.split("").forEach((_, i) => {
+      timers.current.push(
+        window.setTimeout(() => {
+          setTyped(DEMO_TEXT.slice(0, i + 1));
+          if (i === DEMO_TEXT.length - 1) setState("done");
+        }, 240 + i * 22),
+      );
+    });
+  };
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "Alt") start();
+    };
+    const up = (e: KeyboardEvent) => {
+      if (e.key === "Alt") stop();
+    };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+      clearTimers();
+    };
+  });
+
+  return (
+    <div className="demo">
+      <div className="demo-field" aria-live="polite">
+        {typed ? (
+          <span>{typed}</span>
+        ) : (
+          <span className="demo-placeholder">
+            {state === "listening" ? "listening…" : "text lands here"}
+          </span>
+        )}
+        {(state === "typing" || state === "done") && <span className="caret" />}
+      </div>
+      <button
+        type="button"
+        className={`pill ${state === "listening" ? "pill-live" : ""}`}
+        onPointerDown={start}
+        onPointerUp={stop}
+        onPointerLeave={stop}
+        aria-label="Hold to simulate dictation"
+      >
+        {state === "listening" ? (
+          <span className="wave">
+            {Array.from({ length: 9 }, (_, i) => (
+              <i key={i} style={{ animationDelay: `${i * 0.09}s` }} />
+            ))}
+          </span>
+        ) : (
+          <span className="pill-rest" />
+        )}
+      </button>
+      <p className="demo-hint">
+        hold the pill, or hold <kbd>⌥ Option</kbd>
+      </p>
+    </div>
+  );
+}
 
 function Hero() {
-  const scrollToInstall = () =>
-    document.getElementById("install")?.scrollIntoView({ behavior: "smooth" });
   return (
     <section className="hero">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        <div className="wordmark">
-          <Badge variant="secondary">On-device · macOS · v1.1</Badge>
-        </div>
-        <h1>Local, private dictation.</h1>
-        <p className="lede">
-          Press a key, speak, it types. Whisper runs <strong>entirely on your Mac</strong> via Apple
-          MLX. No cloud, no account, no subscription.
-        </p>
-        <div className="cta">
-          <Button variant="primary" size="lg" onClick={scrollToInstall}>
-            Install
-          </Button>
-          <Button variant="outline" size="lg" onClick={() => window.open(REPO, "_blank")}>
-            View source
-          </Button>
-        </div>
-        <p className="privacy-note">🔒 Nothing (no audio, no text) ever leaves your computer.</p>
-      </motion.div>
+      <Badge variant="secondary">macOS · Apple Silicon · on-device</Badge>
+      <h1>
+        Hold a key.
+        <br />
+        Speak. It types.
+      </h1>
+      <p className="lede">
+        Whisper runs on your Mac's GPU. Katha vocabulary comes out spelled right. Nothing leaves
+        the machine.
+      </p>
+      <PillDemo />
     </section>
   );
 }
 
-function ControlPanel() {
-  const [tab, setTab] = useState("settings");
-  const [mode, setMode] = useState("dictation");
-  const [confidence, setConfidence] = useState(true);
-  const [panel, setPanel] = useState(true);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="panel-wrap"
-    >
-      <Window title="W1">
-        <Tabs value={tab} onValueChange={setTab} className="panel-tabs">
-          <TabsList>
-            <TabsTrigger value="settings">Settings</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="about">About</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="settings">
-            <div className="settings-grid">
-              <label className="field">
-                <span>Correction mode</span>
-                <Select
-                  value={mode}
-                  onChange={(e) => setMode(e.target.value)}
-                  options={[
-                    { value: "raw", label: "Dictate (verbatim)" },
-                    { value: "dictation", label: "Default (sacred-aware)" },
-                    { value: "document", label: "Clean + (editorial)" },
-                    { value: "gujarati", label: "Gujarati (katha)" },
-                  ]}
-                />
-              </label>
-              <div className="field">
-                <span>Hotkey</span>
-                <kbd>Hold Right-Option</kbd>
-              </div>
-              <Switch
-                label="Confidence gate: never paste low-confidence audio"
-                checked={confidence}
-                onChange={setConfidence}
-              />
-              <Switch
-                label="Floating paste panel when no field is focused (⌘⇧V)"
-                checked={panel}
-                onChange={setPanel}
-              />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="history">
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableHeaderCell>Time</TableHeaderCell>
-                  <TableHeaderCell>Mode</TableHeaderCell>
-                  <TableHeaderCell>Transcript</TableHeaderCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {HISTORY.map((h) => (
-                  <TableRow key={h.time}>
-                    <TableCell>{h.time}</TableCell>
-                    <TableCell>
-                      <Badge variant="secondary">{h.mode}</Badge>
-                    </TableCell>
-                    <TableCell>{h.text}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TabsContent>
-
-          <TabsContent value="about">
-            <div className="about">
-              <p>
-                <strong>W1 v1.1</strong> is a local, privacy-first macOS dictation app that replaces
-                paid tools like Wispr Flow, and knows BAPS Gujarati sacred terminology.
-              </p>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </Window>
-    </motion.div>
-  );
-}
-
-function Modes() {
-  return (
-    <section className="modes" id="modes">
-      <h2>Four modes, one keypress</h2>
-      <div className="mode-grid">
-        {MODES.map((m, i) => (
-          <motion.div
-            key={m.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.06 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  {m.name} <Badge variant={m.variant}>{m.badge}</Badge>
-                </CardTitle>
-                <CardDescription>{m.desc}</CardDescription>
-              </CardHeader>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-}
+/* ------------------------------------------------------------ code block */
 
 function CodeBlock({ title, lines }: { title?: string; lines: string[] }) {
   const toast = useToast();
@@ -290,82 +191,286 @@ function CodeBlock({ title, lines }: { title?: string; lines: string[] }) {
   );
 }
 
-function Install() {
+/* ------------------------------------------------------------ bento grid */
+
+function Tile({
+  span,
+  eyebrow,
+  children,
+  className = "",
+  id,
+}: {
+  span: string;
+  eyebrow?: string;
+  children: ReactNode;
+  className?: string;
+  id?: string;
+}) {
   return (
-    <section className="install" id="install">
-      <h2>Install</h2>
-      <p className="section-lede">
-        Apple Silicon Mac with{" "}
-        <a href="https://docs.astral.sh/uv/" target="_blank" rel="noreferrer">
-          uv
-        </a>{" "}
-        installed. One command sets up the virtualenv, dependencies, and the Whisper model.
-      </p>
-      <CodeBlock
-        title="Terminal"
-        lines={[
-          "git clone https://github.com/jp-sapio-health/w1.baps.solutions.git w1",
-          "cd w1",
-          "./install.sh        # venv + deps + model + permission links",
-          "./w1 app            # launch the menu-bar app",
-        ]}
-      />
-      <p className="install-note">
-        Grant <strong>Microphone</strong>, <strong>Accessibility</strong>, and{" "}
-        <strong>Input Monitoring</strong> to your terminal when prompted, then hold{" "}
-        <kbd>Right-Option</kbd> and speak.
-      </p>
+    <div className={`tile ${span} ${className}`} id={id}>
+      {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+      {children}
+    </div>
+  );
+}
+
+function Bento() {
+  return (
+    <section className="bento">
+      {/* install: the tile the page exists for */}
+      <Tile span="s7 tall" eyebrow="install" id="install" className="tile-install">
+        <div className="install-actions">
+          <Button variant="primary" size="lg" onClick={() => window.open(DMG, "_blank")}>
+            Download W1.dmg
+          </Button>
+          <span className="install-meta">233 MB · drag to Applications · right-click, Open</span>
+        </div>
+        <div className="install-or">or from source</div>
+        <CodeBlock
+          title="Terminal"
+          lines={[
+            "git clone " + REPO + ".git w1",
+            "cd w1 && ./install.sh   # uv + venv + model, one time",
+            "./w1 app",
+          ]}
+        />
+        <p className="install-perms">
+          Grant <strong>Microphone</strong>, <strong>Accessibility</strong> and{" "}
+          <strong>Input Monitoring</strong> when asked. The menu bar shows ! until all three are
+          on.
+        </p>
+      </Tile>
+
+      <Tile span="s5" eyebrow="gujarati (katha)">
+        <div className="translit">
+          <span className="gu">મંદિર કથા ભગવાન</span>
+          <span className="arrow">→</span>
+          <span className="roman">mandir kathā bhagavān</span>
+        </div>
+        <p>
+          A deterministic transliterator, not a model guess. One diacritic, ā, exactly as the
+          sampradāy's publications print it.
+        </p>
+      </Tile>
+
+      <Tile span="s5" eyebrow="private by construction">
+        <h3>The only network call is the one-time model download.</h3>
+        <p>
+          Audio is held in memory, transcribed on the GPU, discarded. No server, no account, no
+          telemetry. Safe for clinical notes.
+        </p>
+      </Tile>
+
+      <Tile span="s3 center" eyebrow="hotkey">
+        <div className="keycap">⌥</div>
+        <p className="keycap-label">hold Right-Option</p>
+      </Tile>
+
+      <Tile span="s4" eyebrow="four modes">
+        <ul className="mode-list">
+          <li>
+            <strong>Dictate</strong> verbatim, clinical-safe
+          </li>
+          <li>
+            <strong>Default</strong> sacred terms corrected
+          </li>
+          <li>
+            <strong>Clean +</strong> fillers out, tidy prose
+          </li>
+          <li>
+            <strong>Gujarati</strong> ā-only romanisation
+          </li>
+        </ul>
+      </Tile>
+
+      <Tile span="s4" eyebrow="model">
+        <h3>whisper-large-v3-turbo</h3>
+        <p>
+          Distilled by OpenAI from large-v3 (decoder cut 32 layers to 4), converted to MLX,
+          float16 on Metal. About 1.5 GB, cached once.
+        </p>
+      </Tile>
+
+      <Tile span="s4" eyebrow="hallucination gates">
+        <h3>
+          Silence pastes <span className="reject">nothing</span>.
+        </h3>
+        <p>
+          Known Whisper artifacts are dropped, and low-confidence takes (no_speech &gt; 0.6, logprob
+          &lt; -1.0) show a red X instead of inserting noise.
+        </p>
+      </Tile>
+
+      <Tile span="s6 dark" eyebrow="cli">
+        <CodeBlock
+          title="w1"
+          lines={[
+            "./w1 doctor       # deps, model, permissions",
+            "./w1 transcribe FILE --mode gujarati",
+            "./w1 debug-keys   # watch the hotkey listener",
+          ]}
+        />
+      </Tile>
+
+      <Tile span="s6" eyebrow="open">
+        <h3>Small, tested, readable.</h3>
+        <p>
+          52 unit tests, 96% coverage on the engine, an import-linter contract keeping the core
+          free of macOS imports, and a build that refuses to ship a bundle that fails its own
+          runtime self-test.
+        </p>
+        <a className="tile-link" href={REPO} target="_blank" rel="noreferrer">
+          Read the source →
+        </a>
+      </Tile>
     </section>
   );
 }
 
-function Cli() {
+/* ------------------------------------------------- readme, from the repo */
+
+type Block =
+  | { kind: "h"; level: number; text: string }
+  | { kind: "code"; lines: string[] }
+  | { kind: "table"; head: string[]; rows: string[][] }
+  | { kind: "list"; ordered: boolean; items: string[] }
+  | { kind: "p"; text: string };
+
+function parseMarkdown(src: string): Block[] {
+  const lines = src.split("\n");
+  const blocks: Block[] = [];
+  let i = 0;
+  while (i < lines.length) {
+    const l = lines[i];
+    if (l.startsWith("```")) {
+      const code: string[] = [];
+      i++;
+      while (i < lines.length && !lines[i].startsWith("```")) code.push(lines[i++]);
+      i++;
+      blocks.push({ kind: "code", lines: code });
+    } else if (/^#{1,3} /.test(l)) {
+      const level = l.match(/^#+/)![0].length;
+      blocks.push({ kind: "h", level, text: l.replace(/^#+ /, "") });
+      i++;
+    } else if (l.startsWith("|") && lines[i + 1]?.startsWith("|")) {
+      const rows: string[][] = [];
+      while (i < lines.length && lines[i].startsWith("|")) {
+        rows.push(lines[i].split("|").slice(1, -1).map((c) => c.trim()));
+        i++;
+      }
+      blocks.push({ kind: "table", head: rows[0], rows: rows.slice(2) });
+    } else if (/^(-|\d+\.) /.test(l)) {
+      const ordered = /^\d+\./.test(l);
+      const items: string[] = [];
+      while (i < lines.length && (/^(-|\d+\.) /.test(lines[i]) || /^ {2,}\S/.test(lines[i]))) {
+        if (/^(-|\d+\.) /.test(lines[i])) items.push(lines[i].replace(/^(-|\d+\.) /, ""));
+        else items[items.length - 1] += " " + lines[i].trim();
+        i++;
+      }
+      blocks.push({ kind: "list", ordered, items });
+    } else if (l.trim() === "") {
+      i++;
+    } else {
+      const para: string[] = [];
+      while (i < lines.length && lines[i].trim() !== "" && !/^(#|```|\||-|\d+\.)/.test(lines[i]))
+        para.push(lines[i++]);
+      blocks.push({ kind: "p", text: para.join(" ") });
+    }
+  }
+  return blocks;
+}
+
+/** Inline markdown: `code`, **bold**, [text](url). Small on purpose. */
+function Inline({ text }: { text: string }) {
+  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
   return (
-    <section className="cli" id="cli">
-      <h2>Command line</h2>
-      <CodeBlock
-        title="w1"
-        lines={[
-          "./w1 app                       # menu-bar app + floating widget",
-          "./w1 dictate                   # record, correct, paste",
-          "./w1 transcribe FILE --mode …  # transcribe an audio file",
-          './w1 correct "text" --mode …   # run the correction engine only',
-          "./w1 doctor                    # check deps, model, permissions",
-        ]}
-      />
+    <>
+      {parts.map((p, i) => {
+        if (p.startsWith("`")) return <code key={i}>{p.slice(1, -1)}</code>;
+        if (p.startsWith("**")) return <strong key={i}>{p.slice(2, -2)}</strong>;
+        const link = p.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (link)
+          return (
+            <a key={i} href={link[2]} target="_blank" rel="noreferrer">
+              {link[1]}
+            </a>
+          );
+        return <span key={i}>{p}</span>;
+      })}
+    </>
+  );
+}
+
+function Readme() {
+  const blocks = parseMarkdown(readmeRaw);
+  return (
+    <section className="readme" id="readme">
+      <div className="eyebrow">README.md · rendered from the repo</div>
+      {blocks.map((b, i) => {
+        switch (b.kind) {
+          case "h": {
+            if (b.level === 1) return null; /* the page already says W1 */
+            const H = b.level === 2 ? "h2" : "h3";
+            return <H key={i}>{b.text}</H>;
+          }
+          case "code":
+            return <CodeBlock key={i} lines={b.lines} />;
+          case "table":
+            return (
+              <table key={i}>
+                <thead>
+                  <tr>
+                    {b.head.map((h, j) => (
+                      <th key={j}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {b.rows.map((r, j) => (
+                    <tr key={j}>
+                      {r.map((c, k) => (
+                        <td key={k}>
+                          <Inline text={c} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            );
+          case "list": {
+            const L = b.ordered ? "ol" : "ul";
+            return (
+              <L key={i}>
+                {b.items.map((it, j) => (
+                  <li key={j}>
+                    <Inline text={it} />
+                  </li>
+                ))}
+              </L>
+            );
+          }
+          default:
+            return (
+              <p key={i}>
+                <Inline text={b.text} />
+              </p>
+            );
+        }
+      })}
     </section>
   );
 }
 
-function HowItWorks() {
-  return (
-    <section className="how" id="how">
-      <h2>How it works</h2>
-      <div className="steps">
-        {STEPS.map((s) => (
-          <Card key={s.n}>
-            <CardContent>
-              <div className="step-n">{s.n}</div>
-              <h3>{s.t}</h3>
-              <p>{s.d}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </section>
-  );
-}
+/* ------------------------------------------------------------------ page */
 
 export function App() {
   return (
     <div className="page light" id="top">
       <Navbar />
       <Hero />
-      <Install />
-      <ControlPanel />
-      <Modes />
-      <Cli />
-      <HowItWorks />
+      <Bento />
+      <Readme />
       <footer>
         <span className="foot-brand">
           <img src="/baps-logo.svg" alt="BAPS" width={18} height={18} />

@@ -62,16 +62,57 @@ class W1App(rumps.App):
             for mode, label in _MODE_LABEL.items()
         }
         self._mode_items[CorrectionMode.dictation].state = 1
+        # Permissions submenu: live status + one-click open of the exact pane. Input Monitoring
+        # is the one users miss (Accessibility alone is not enough for the key tap on macOS 14+).
+        self._perm_status_item = rumps.MenuItem("Checking permissions…", callback=None)
+        self._perm_menu = rumps.MenuItem("Permissions")
+        self._perm_menu.update([
+            self._perm_status_item,
+            None,
+            rumps.MenuItem("Open Input Monitoring settings", callback=self._open_input_monitoring),
+            rumps.MenuItem("Open Accessibility settings", callback=self._open_accessibility),
+        ])
         self.menu = [
             rumps.MenuItem("W1 — hold Right-Option to talk", callback=None),
             None,
             *self._mode_items.values(),
             None,
+            self._perm_menu,
             rumps.MenuItem("Relaunch W1", callback=self._relaunch),
             rumps.MenuItem("About W1", callback=self._about),
             None,
             rumps.MenuItem("Quit W1", callback=self._quit),
         ]
+
+    # -- permissions ----------------------------------------------------------
+    def refresh_permission_status(self, _timer=None) -> None:
+        """Reflect current grants in the menu; flag the hotkey as blocked when Input Monitoring is off."""
+        from w1_macos.permissions import permission_status
+
+        s = permission_status()
+        im, ax = s["input_monitoring"], s["accessibility"]
+        if im == "granted" and ax == "granted":
+            self._perm_status_item.title = "Permissions granted ✓"
+            self.title = None
+        else:
+            missing = []
+            if im != "granted":
+                missing.append("Input Monitoring")
+            if ax != "granted":
+                missing.append("Accessibility")
+            self._perm_status_item.title = "Hotkey blocked — enable: " + ", ".join(missing)
+            # A visible menu-bar cue so the user is not left guessing why nothing happens.
+            self.title = "!"
+
+    def _open_input_monitoring(self, _item=None) -> None:
+        from w1_macos.permissions import open_settings_pane
+
+        open_settings_pane("input_monitoring")
+
+    def _open_accessibility(self, _item=None) -> None:
+        from w1_macos.permissions import open_settings_pane
+
+        open_settings_pane("accessibility")
 
     # -- state / UI -----------------------------------------------------------
     def _on_state(self, state: str) -> None:
@@ -111,8 +152,7 @@ class W1App(rumps.App):
             title="W1",
             message=(
                 f"W1 v{_short_version()}\n\n"
-                "Local, privacy-first dictation — English + BAPS Gujarati,\n"
-                "fully on-device. Built for sewa. Private by design."
+                "Local, private dictation. English and BAPS Gujarati."
             ),
             ok="Close",
         )
@@ -147,31 +187,34 @@ class W1App(rumps.App):
 def main() -> int:
     app = W1App()
 
-    # Ask macOS for Input Monitoring + Accessibility up front. Without this, pynput's event
-    # tap starts but silently receives no keys, and a grant made against a previous build's
-    # signature never re-prompts. The request registers THIS binary in System Settings.
+    # Request Input Monitoring + Accessibility ONCE (see request_missing_once: re-prompting every
+    # launch is what produced the "asks every time" nag). The hotkey needs BOTH; on macOS 14+ the
+    # one users miss is Input Monitoring (Accessibility alone is not enough for pynput's key tap).
     try:
-        from w1_macos.permissions import ensure_permissions
+        from w1_macos.permissions import request_missing_once
 
-        perms = ensure_permissions()
+        perms = request_missing_once()
         missing = [k for k, v in perms.items() if v != "granted"]
         if missing:
             print(f"[w1] permissions not granted yet: {', '.join(missing)}")
             rumps.notification(
-                "W1 needs permissions",
-                "The hotkey will not work until these are enabled.",
-                "System Settings > Privacy & Security > "
-                + " and ".join(m.replace("_", " ").title() for m in missing)
-                + ". Enable W1, then choose Relaunch W1 from the menu.",
+                "W1 needs permission to hear the hotkey",
+                "Enable W1 under " + " and ".join(m.replace("_", " ").title() for m in missing),
+                "Open the menu bar → Permissions → Open Input Monitoring settings, switch W1 on, "
+                "then Relaunch W1.",
             )
     except Exception as exc:  # permission checks must never stop the app
         print(f"[w1] permission check failed: {exc}")
 
     try:
-        app.hotkey.start()  # needs Input Monitoring; requested above
+        app.hotkey.start()  # needs Input Monitoring + Accessibility; requested above
     except Exception as exc:
         print(f"[w1] hotkey listener could not start (grant Input Monitoring): {exc}")
     app.controller.warm_up()
+    # Keep the menu status live so the user sees the moment a grant takes effect.
+    app.refresh_permission_status()
+    app._perm_timer = rumps.Timer(app.refresh_permission_status, 3.0)
+    app._perm_timer.start()
 
     def _init_widget(timer) -> None:
         try:

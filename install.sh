@@ -33,9 +33,11 @@ ok "macOS $(sw_vers -productVersion) ($(uname -m))"
 
 # 2. uv (fast Python package manager) ---------------------------------------
 if ! command -v uv >/dev/null 2>&1; then
-  warn "uv not found. Install it with:  curl -LsSf https://astral.sh/uv/install.sh | sh"
-  warn "then re-run ./install.sh"
-  exit 1
+  bold "Installing uv (Python package manager, from astral.sh)"
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  # The installer drops uv in ~/.local/bin; pick it up without requiring a new shell.
+  export PATH="$HOME/.local/bin:$PATH"
+  command -v uv >/dev/null 2>&1 || { echo "uv install failed — see https://docs.astral.sh/uv/" >&2; exit 1; }
 fi
 ok "uv $(uv --version | awk '{print $2}')"
 
@@ -45,10 +47,11 @@ uv venv --python "$PY_VERSION" .venv
 ok ".venv created"
 
 bold "Installing w1 + dependencies (this pulls PyTorch-free MLX wheels; a few minutes)"
+# End users get the runtime only; add ",dev" yourself for pytest + import-linter.
 if [ "$(uname -m)" = "arm64" ]; then
-  uv pip install --python .venv/bin/python -e '.[mlx,macos,dev]'
+  uv pip install --python .venv/bin/python -e '.[mlx,macos]'
 else
-  uv pip install --python .venv/bin/python -e '.[faster,macos,dev]'
+  uv pip install --python .venv/bin/python -e '.[faster,macos]'
 fi
 ok "dependencies installed"
 

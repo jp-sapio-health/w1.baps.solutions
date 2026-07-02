@@ -60,16 +60,46 @@ def accessibility_status(prompt: bool = False) -> str:
         return "unknown"
 
 
-def ensure_permissions() -> dict:
-    """Startup check: request anything missing so macOS registers this exact binary.
+# System Settings deep links. Opening a pane is a plain navigation action (no security change);
+# it just puts the user one click from the toggle W1 cannot flip on their behalf.
+_PANE_INPUT_MONITORING = (
+    "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent"
+)
+_PANE_ACCESSIBILITY = (
+    "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
+)
 
-    Returns {"input_monitoring": status, "accessibility": status} AFTER the requests, so the
-    caller can tell the user what still needs a manual toggle (a denied grant only prompts
-    once; after that the user must flip it in System Settings).
+
+def open_settings_pane(which: str) -> None:
+    """Open the Input Monitoring or Accessibility pane in System Settings."""
+    import subprocess
+
+    url = _PANE_INPUT_MONITORING if which == "input_monitoring" else _PANE_ACCESSIBILITY
+    try:
+        subprocess.Popen(["/usr/bin/open", url])
+    except Exception:
+        pass
+
+
+def permission_status() -> dict:
+    """Current grants without side effects: {'input_monitoring': ..., 'accessibility': ...}."""
+    return {
+        "input_monitoring": input_monitoring_status(),
+        "accessibility": accessibility_status(prompt=False),
+    }
+
+
+def request_missing_once() -> dict:
+    """Fire the OS grant prompt for each missing permission EXACTLY once per process.
+
+    The hotkey needs BOTH Accessibility and, on recent macOS, Input Monitoring for pynput's
+    listen-only key tap. IOHIDRequestAccess only shows a dialog the first time an app is seen;
+    AXIsProcessTrustedWithOptions(prompt=True) would re-nag on every launch, so the caller must
+    invoke this at most once. Returns the post-request status dict.
     """
     im = input_monitoring_status()
     if im != "granted":
-        request_input_monitoring()  # shows the system prompt / registers the app row
+        request_input_monitoring()
         im = input_monitoring_status()
     ax = accessibility_status(prompt=False)
     if ax != "granted":
