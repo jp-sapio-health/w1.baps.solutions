@@ -136,16 +136,8 @@ function PillDemo() {
 function Hero() {
   return (
     <section className="hero">
-      <Badge variant="secondary">macOS · Apple Silicon · on-device</Badge>
-      <h1>
-        Hold a key.
-        <br />
-        Speak. It types.
-      </h1>
-      <p className="lede">
-        Whisper runs on your Mac's GPU. Katha vocabulary comes out spelled right. Nothing leaves
-        the machine.
-      </p>
+      <Badge variant="secondary">macOS · on-device</Badge>
+      <p className="hero-spec">whisper-large-v3-turbo | runs on the Apple Silicon GPU</p>
       <PillDemo />
     </section>
   );
